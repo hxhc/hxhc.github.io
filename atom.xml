@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hxhc.github.io</id>
     <title>HXHC Blog</title>
-    <updated>2019-06-19T09:37:39.371Z</updated>
+    <updated>2019-06-19T09:59:00.520Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hxhc.github.io"/>
     <link rel="self" href="https://hxhc.github.io/atom.xml"/>
@@ -12,8 +12,8 @@
     <rights>All rights reserved 2019, HXHC Blog</rights>
     <entry>
         <title type="html"><![CDATA[Linux服务器安装Matlab2017_多镜像文件版本]]></title>
-        <id>https://hxhc.github.io/post/hello-gridea</id>
-        <link href="https://hxhc.github.io/post/hello-gridea">
+        <id>https://hxhc.github.io/post/KMfHau5E_</id>
+        <link href="https://hxhc.github.io/post/KMfHau5E_">
         </link>
         <updated>2018-01-24T10:36:14.000Z</updated>
         <summary type="html"><![CDATA[<p>实验室服务器为Ubuntu 14.04.5系统，性能自然不用说，Matlab却只有2013b和2012a的版本，让本地使用2016a的同志们感到不舒服，因为有些函数还是有很大修改的（比如matlabpool）。在实验室同志的强烈要求下，给服务器装了Matlab2017a版本（2016a的版本没找到破解版~）。</p>
