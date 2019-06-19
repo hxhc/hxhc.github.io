@@ -3,8 +3,8 @@
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hello Gridea | HXHC Blog</title>
-<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1560936435409">
+<title>Linux服务器安装Matlab2017_多镜像文件版本 | HXHC Blog</title>
+<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1560936985712">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://hxhc.github.io/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://hxhc.github.io">
-  <img class="avatar" src="https://hxhc.github.io/images/avatar.png?v=1560936435409" alt="">
+  <img class="avatar" src="https://hxhc.github.io/images/avatar.png?v=1560936985712" alt="">
   </a>
   <h1 class="site-title">
     HXHC Blog
@@ -78,16 +78,12 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Hello Gridea
+              Linux服务器安装Matlab2017_多镜像文件版本
             </h2>
             <div class="post-info">
               <time class="post-time">
-                · 2018-12-12 ·
+                · 2018-01-24 ·
               </time>
-              
-                <a href="https://hxhc.github.io/tag/gridea" class="post-tag">
-                  # Gridea
-                </a>
               
             </div>
             
@@ -95,27 +91,97 @@
               </div>
             
             <div class="post-content">
-              <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="http://hvenotes.fehey.com/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>𝖶𝗂𝗇𝖽𝗈𝗐𝗌</strong> 或 <strong>𝖬𝖺𝖼𝖮𝖲</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+              <p>实验室服务器为Ubuntu 14.04.5系统，性能自然不用说，Matlab却只有2013b和2012a的版本，让本地使用2016a的同志们感到不舒服，因为有些函数还是有很大修改的（比如matlabpool）。在实验室同志的强烈要求下，给服务器装了Matlab2017a版本（2016a的版本没找到破解版~）。</p>
+<!--more-->
+<p>其实网上已经有很多服务器安装matlab的<a href="https://zhyack.github.io/posts/2016_03_07-Install-Matlab-On-Ubuntu-Server.html">教程</a>了,不过多少有点差别，以下稍微记录一下安装记录：</p>
+<ol>
+<li><a href="http://www.xdowns.com/soft/184/Linux/2017/Soft_195115.html">下载</a>，解压，得到两个iso镜像文件和一个Crack文件夹：</li>
+</ol>
+<pre><code>.
+|-- R2017a_glnxa64_dvd1.iso
+|-- R2017a_glnxa64_dvd2.iso
+|-- Crack
+    |-- Readme.txt
+    |-- license_server.lic
+    |-- license_standalone.lic
+    |-- MATLAB_Production_Server
+        |-- R2017a
+            |-- bin
+                |-- glnxa64
+                    |-- libmwservices.so
+    |-- R2017a
+        |-- bin
+            |-- glnxa64
+                |-- libmwservices.so
+</code></pre>
+<ol start="2">
+<li>由于服务器已经配置好了Java环境，我也没有配置经验，如果Java环境有问题，还是看别人的教程吧~</li>
+<li>创建目录</li>
+</ol>
+<pre><code class="language-bash">$ sudo mkdir -p /usr/local/matlab2017a/2017a  # 安装目录
+$ sudo mkdir -p /usr/local/matlab2017a/etc  # 配置文件目录
+</code></pre>
+<ol start="4">
+<li>挂载镜像。挂载需要提权，所以还是得sudo</li>
+</ol>
+<pre><code class="language-bash">$ cd ~/matlab2017a  # 更改为镜像文件所在的目录，当然首先得把文件传到服务器上
+$ mkdir iso  # 创建挂载目录
+$ sudo mount R2017a_glnxa64_dvd1.iso iso/  # 挂载,发现镜像里竟然包含了crack文件夹，不管他了
+</code></pre>
+<ol start="5">
+<li>挂载后的目录里有<code>install</code>文件，直接安装肯定不行，因为没有图形界面，我们要采取silent的安装方式</li>
+</ol>
+<pre><code class="language-bash">$ cd iso
+$ sudo cp installer_input.txt /usr/local/matlab2017a/etc/  # 复制
+$ sudo cp activate.ini /usr/local/matlab2017a/etc/  # 复制
+$ sudo cp -r Crack /usr/local/matlab2017a/etc/  # 复制破解文件夹
+$ cd /usr/local/matlab2017a/etc
+$ sudo chomd +w installer_input.txt  # 增加写的权限
+$ sudo chmod +w activate.ini3  # 增加写的权限
+</code></pre>
+<ol start="6">
+<li>修改复制后的<code>installer_input.txt</code>文件</li>
+</ol>
+<pre><code class="language-txt">destinationFolder=/usr/local/matlab2017a/2017a  # 安装目录
+fileInstallationKey=09806-07443-53955-64350-21751-41297  # 序列号
+agreeToLicense=yes  # 同意协议
+outputFile=/tmp/mathworks_install.log  # 安装日志
+mode=silent  # 开启无人值守安装
+activationPropertiesFile=/usr/local/matlab2017a/etc/activate.ini # 激活文件
+licensePath= /usr/local/matlab2017a/etc/Crack/license_standalone.lic  # license文件
+</code></pre>
+<ol start="7">
+<li>修改复制后的<code>activate.ini</code>文件</li>
+</ol>
+<pre><code>isSilent=true  # 开启silent模式
+activateCommand=activateOffline  # 设置激活方式, 离线激活 无需联网
+licenseFile=/usr/local/matlab2017a/etc/Crack/license_standalone.lic  # license文件位置
+</code></pre>
+<ol start="8">
+<li>安装</li>
+</ol>
+<pre><code class="language-bash">$ cd ~/matlab2017a  # 回到原目录下，注意，该目录下挂载了iso,安装时不能在iso目录下安装
+$ screen -S matlab  # 创建一个screen，避免断网等不愉快的事带来的烦恼
+$ sudo iso/install -inputFile /usr/local/matlab2017a/etc/installer_input.txt
+$ (退出screen， Ctrl+A，D)  # 安装到差不多时会停止，提醒插入光盘2，先退出screen为好
+$ sudo mount R2017a_glnxa64_dvd2.iso iso/  # 挂载光盘2
+$ screen -r matlab  # 此时恢复screen，可以发现自动安装了
+</code></pre>
+<ol start="9">
+<li>破解，其实就是把Crack文件夹里的<code>libmwservice.so</code>文件覆盖原文件</li>
+</ol>
+<pre><code class="language-bash">$ sudo mv /usr/local/matlab2017a/2017a/bin/glnxa64/libmwservices.so \
+&gt; /usr/local/matlab/2017a/bin/glnxa64/libmwservices.so.bak  备份一下
+$ sudo cp /usr/local/matlab2017/etc/Crack/R2017a/bin/glnxa64/libmwservice.so \
+&gt; /usr/local/matlab2017a/2017a/bin/glnxa64/  # 目录太长了~
+$ sudo /usr/local/matlab2017a/2017a/bin/activate_matlab.sh -propertiesFile /usr/local/matlab2017a/etc/activate.ini
+</code></pre>
+<ol start="10">
+<li>基本上大功告成，添加一个alias以后用起来方便点,在<code>~/.bashrc</code>文件最后加入一句,然后<code>source ~/.bashrc</code>即可</li>
+</ol>
+<pre><code>alias matlab2017=&quot;/usr/local/matlab2017a/2017a/bin/matlab&quot;
+
+</code></pre>
 
             </div>
           </article>
