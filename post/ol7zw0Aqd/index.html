@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>Frp内网穿透及HTTP代理的实现 | HXHC Blog</title>
+<meta name="description" content="English version not available">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1562834445219">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://hxhc.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://hxhc.github.io">
+        <img class="avatar" src="https://hxhc.github.io/images/avatar.png?v=1562834445219" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://hxhc.github.io">
+        <h1 class="site-title">HXHC Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+            <div class="feature-container" style="background-image: url('https://pullzone1-stationx.netdna-ssl.com/wp-content/uploads/2014/12/penetration-testing-500.jpg')">
+            </div>
+          
+          <h2 class="post-title">Frp内网穿透及HTTP代理的实现</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-07-11</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://hxhc.github.io/tag/Software">
+                    Software
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <h2 id="背景">背景</h2>
+<p>随着互联网的快速发展和入网设备的增多，公网IPv4地址越来越稀罕。试想一下，如果你在家里或者在单位里搭建了一套网络服务，比如NAS，如果没有公网ip，又改如何在外连接呢？</p>
+<p>内网穿透是一种非常常见和有用的技术，如当需要访问公司内网的计算机时，内网穿透技术就可派上用场。</p>
+<p>常用的内网穿透软件包括ngrok、zeroto向日葵等，<a href="https://github.com/fatedier/frp">frp</a>是国人开发的一款高性能内网穿透工具，具有相当强大灵活的功能。</p>
+<h2 id="应用">应用</h2>
+<p>此处不赘述frp的原理，只简单的介绍frp的应用。</p>
+<p>使用frp需要一台具有公网ip的服务器，推荐使用国内的服务器，国外的服务器由于延迟的原因使用体验非常差。</p>
+<h3 id="服务器端设置">服务器端设置</h3>
+<p>选用阿里云的轻量服务器，首先根据服务器平台下载相应的软件。在服务器主要设置frps.ini这个文件。服务器端的设置主要就这么一些，其他功能配置基本在客户端完成。</p>
+<pre><code class="language-ini">[common]
+# A literal address or host name for IPv6 must be enclosed
+# in square brackets, as in &quot;[::1]:80&quot;, &quot;[ipv6-host]:http&quot; or &quot;[ipv6-host%zone]:80&quot;
+bind_addr = 0.0.0.0
+bind_port = 7000
+
+# udp port to help make udp hole to penetrate nat
+bind_udp_port = 7001
+
+# udp port used for kcp protocol, it can be same with 'bind_port'
+# if not set, kcp is disabled in frps
+kcp_bind_port = 7000
+
+
+dashboard_addr = 0.0.0.0
+dashboard_port = 7500
+
+dashboard_user = admin
+dashboard_pwd = admin
+
+token = 12345678
+</code></pre>
+<h3 id="客户端设置校园内的设备">客户端设置（校园内的设备）</h3>
+<p>由于经常不在学校，很多学术数据库都是ip控制的，比如IEEE（在这里为Elsevier鼓掌，<a href="https://www.elsevier.com/solutions/sciencedirect/support/sd-tutorials/activating-using-remote-access-sciencedirect">remote access</a>功能非常好用，任何地方都不用担心不能查阅文献），所以我需要的功能是在外浏览这些学术期刊时，可以通过内网穿透，用学校的ip进行访问。</p>
+<p>实现的方法有很多，比如在客户端建立vpn，把客户端作为shadowsocks服务器以及其他一些方法。但是如果只是为了实现以上功能，frp提供了一个<a href="%5Bhttps://github.com/fatedier/frp/blob/master/README_zh.md#%E6%8F%92%E4%BB%B6%5D(https://github.com/fatedier/frp/blob/master/README_zh.md#%E6%8F%92%E4%BB%B6)">http_proxy插件</a>，非常简单和高效。</p>
+<p>配置参考官方readme，也没什么可说的。之后再本地运行frpc即可。以下配置实现了ssh和http代理的功能，在浏览学术期刊时，通过该http代理，即可愉快（真的吗？）地科研了。</p>
+<pre><code class="language-ini"># frpc.ini
+[common]
+server_addr = x.x.x.x
+server_port = 7000
+
+# If ssh needed
+[ssh]
+type = tcp
+local_ip = 127.0.0.1
+local_port = 22
+remote_port = 6000
+
+# http_proxy_plugin
+[http_proxy]
+type = tcp
+remote_port = 6000
+plugin = http_proxy
+plugin_http_user = abc
+plugin_http_passwd = abc
+</code></pre>
+<p>关于如何设置http代理这最后一步，个人比较推荐采用proxyswitch omega这个插件来实现，在切换时比较方便，而windows全局代理显得太暴力了。此外，根据frp作者所说，采用插件的方式比起其他方法实现该功能，效率是较高的。</p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://hxhc.github.io/post/NNj0zXD8v">
+              <h3 class="post-title">
+                下一篇： Openwrt下实现无线中继
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">English version not available</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://hxhc.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '2746a577092c892a1bcf',
+        clientSecret: 'f4c7791f4ecd0cc82dbc7c92be83dcc5bc4f9666',
+        repo: 'hxhc.github.io',
+        owner: 'hxhc',
+        admin: ['hxhc'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
