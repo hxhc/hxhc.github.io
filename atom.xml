@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hxhc.github.io</id>
     <title>HXHC Blog</title>
-    <updated>2019-07-11T08:45:24.820Z</updated>
+    <updated>2019-07-11T08:49:00.663Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hxhc.github.io"/>
     <link rel="self" href="https://hxhc.github.io/atom.xml"/>
@@ -16,6 +16,16 @@
         <link href="https://hxhc.github.io/post/ol7zw0Aqd">
         </link>
         <updated>2019-07-11T08:31:06.000Z</updated>
+        <summary type="html"><![CDATA[<h2 id="背景">背景</h2>
+<p>随着互联网的快速发展和入网设备的增多，公网IPv4地址越来越稀罕。试想一下，如果你在家里或者在单位里搭建了一套网络服务，比如NAS，如果没有公网ip，又改如何在外连接呢？</p>
+<p>内网穿透是一种非常常见和有用的技术，如当需要访问公司内网的计算机时，内网穿透技术就可派上用场。</p>
+<p>常用的内网穿透软件包括ngrok、zeroto向日葵等，<a href="https://github.com/fatedier/frp">frp</a>是国人开发的一款高性能内网穿透工具，具有相当强大灵活的功能。</p>
+]]></summary>
+        <content type="html"><![CDATA[<h2 id="背景">背景</h2>
+<p>随着互联网的快速发展和入网设备的增多，公网IPv4地址越来越稀罕。试想一下，如果你在家里或者在单位里搭建了一套网络服务，比如NAS，如果没有公网ip，又改如何在外连接呢？</p>
+<p>内网穿透是一种非常常见和有用的技术，如当需要访问公司内网的计算机时，内网穿透技术就可派上用场。</p>
+<p>常用的内网穿透软件包括ngrok、zeroto向日葵等，<a href="https://github.com/fatedier/frp">frp</a>是国人开发的一款高性能内网穿透工具，具有相当强大灵活的功能。</p>
+]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[ Openwrt下实现无线中继]]></title>
@@ -23,6 +33,10 @@
         <link href="https://hxhc.github.io/post/NNj0zXD8v">
         </link>
         <updated>2019-07-11T08:03:14.000Z</updated>
+        <summary type="html"><![CDATA[<p>家里装修比较早，只接入了一根网线，也就只能接一个无线路由器。由于我的房间在楼下，无线路由器在楼上，信号质量有点捉襟见肘，而且不同设备间使用局域网时也会掉线，实在影响使用体验。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>家里装修比较早，只接入了一根网线，也就只能接一个无线路由器。由于我的房间在楼下，无线路由器在楼上，信号质量有点捉襟见肘，而且不同设备间使用局域网时也会掉线，实在影响使用体验。</p>
+]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[Linux服务器安装Matlab2017_多镜像文件版本]]></title>
