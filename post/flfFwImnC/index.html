@@ -1,186 +1,106 @@
-
+<!DOCTYPE html>
 <html>
-  <head lang="zh">
-        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
-        <meta content="yes" name="apple-mobile-web-app-capable"/>
-        <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
-        <meta content="telephone=no" name="format-detection"/>
-        <meta name="renderer" content="webkit">
-    <title>Windows下创建共享文件夹并映射网络驱动器 | HXHC Blog</title>
-<link href="https://hxhc.github.io/styles/main.css" type="text/css" rel="stylesheet"/>
-<script type="text/javascript" src="https://hxhc.github.io/media/scripts/jquery.js"></script>
-<script type="text/javascript" src="https://hxhc.github.io/media/scripts/basic.js"></script>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Windows下创建共享文件夹并映射网络驱动器 | HXHC Blog</title>
+<meta name="description" content="English version not available">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1563184225537">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://hxhc.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
 
   </head>
-
   <body>
-     <div class="header">
-      <div class="logo_title">
-		  
-        <div class="title animated fadeInDown"><img src="https://hxhc.github.io/images/avatar.png?v=1563180729588"/>
-
-          <h1 title="HXHC Blog" class="weaklink"><a href="/">HXHC Blog</a>
-
-          </h1>
-
-          <div class="navbar weaklink">
-            <div class="normal_nav">
-
-<div class="bitcron_nav_container">
-
-
-  <div class="bitcron_nav">
-    <div class="mixed_site_nav_wrap site_nav_wrap">
-		
-      <ul class="mixed_site_nav site_nav sm sm-base">
- 
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >Home</a>
-
-  </li>
- 
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >Archives</a>
-
-  </li>
- 
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >Tags</a>
-
-  </li>
- 
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >About</a>
-
-  </li>
- 
-
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://hxhc.github.io">HXHC Blog</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                Home
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                Archives
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                Tags
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                About
+              </a>
+            
+          </li>
+        
       </ul>
-
-      <div class="clear clear_nav_inline_end"></div>
-
     </div>
-
   </div>
-
-
-
-  <div class="clear clear_nav_end"></div>
-
-</div>
-
-            </div>
-
-            <div class="hamberger"><i class="fa fa-bars"></i>
-<i class="fa fa-times"></i>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="hidden_nav animated fadeInDown">
-
-<div class="bitcron_nav_container">
-
-
-  <div class="bitcron_nav">
-    <div class="mixed_site_nav_wrap site_nav_wrap">
-      <ul class="mixed_site_nav site_nav sm sm-base">
-		  
-	
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >Home</a>
-
-  </li>
-
-
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >Archives</a>
-
-  </li>
-
-
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >Tags</a>
-
-  </li>
-
-
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >About</a>
-
-  </li>
-
-
-
-
-
-      </ul>
-
-      <div class="clear clear_nav_inline_end"></div>
-
-    </div>
-
-  </div>
-
-
-
-  <div class="clear clear_nav_end"></div>
-
-</div>
-
-      </div>
-
-    </div>
-
-
-    <div class="main">
-      <div class="main-inner">
-
-
-<div class="content">
-
-
-
-
-
-
-  <div class="post_page" >
-
-<div class="post">
-  <div class="post_title sm_margin">
-    <h2><a>Windows下创建共享文件夹并映射网络驱动器</a>
-
-
-
-    </h2>
-  </div>
-
-  <div class="post_details">
-    <div class="info"><i class="fa fa-clock-o"></i>
-<span class="date_info">2019-07-15</span>
-<i class="fa fa-eye"></i>
-
-<span class="date_info"><span id="busuanzi_value_page_pv"></span> Views</span>
-
-
-<i class="fa fa-bookmark-o"></i>
-<span class="tags_info weaklink">
-	
-	<a href="https://hxhc.github.io/tag/Software" class="tag">Software</a>
-
-
-</span>
-
-
-    </div>
-
-  </div>
-
-
-
-
-
-  <div class="post_content markdown"><p class="md_block">
-    <span class="md_line md_line_start md_line_end"><p>在仪器使用过程中，工作站电脑应以稳定作为首要目标，这也意味着一些其他服务最好放在其他电脑上，如文件共享等。可采用以下的网络架构来实现文件的共享和外部访问。</p>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>Windows下创建共享文件夹并映射网络驱动器</h1>
+            <p class="article-meta">
+              2019-07-15
+              
+                <a href="https://hxhc.github.io/tag/Software" class="badge warning">
+                  Software
+                </a>
+              
+            </p>
+            
+              <img src="https://helpdeskgeek.com/wp-content/pictures/2019/04/share-files.png.webp" alt="Windows下创建共享文件夹并映射网络驱动器">
+            
+            <div class="post-content">
+              <p>在仪器使用过程中，工作站电脑应以稳定作为首要目标，这也意味着一些其他服务最好放在其他电脑上，如文件共享等。可采用以下的网络架构来实现文件的共享和外部访问。</p>
 <!-- more -->
 <h2 id="简单的架构">简单的架构</h2>
 <ol>
@@ -224,155 +144,142 @@
 <li>FTP服务端软件可以选择Xlight和filezilla等，大体设置都差不多，注意用户的读写权限即可。</li>
 <li>在防火墙处，在入站规则与出站规则处，将ftp软件列入允许名单中</li>
 </ul>
-</p>
 
-     <p class="md_block">
-    <div class="reward"><div class="reward-button">赏 <span class="reward-code"> <span class="alipay-code"> <img class="alipay-img" src="https://hxhc.github.io/media/images/alipay.png"><b>支付宝扫码打赏</b> </span> <span class="wechat-code"> <img class="wechat-img" src="https://hxhc.github.io/media/images/wechat.png"><b>微信打赏</b> </span> </span></div></div>
-</p> 
-</div>
-
-</div>
-
-
-
-<link href="https://hxhc.github.io/styles/main.css" type="text/css" rel="stylesheet"/>
-
-<div class="doc_comments">
-
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
           
-            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-<div id="gitalk-container"></div>
-
-<script>
-
-  var gitalk = new Gitalk({
-    clientID: '2746a577092c892a1bcf',
-    clientSecret: 'f4c7791f4ecd0cc82dbc7c92be83dcc5bc4f9666',
-    repo: 'hxhc.github.io',
-    owner: 'hxhc',
-    admin: ['hxhc'],
-    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
-    distractionFreeMode: false  // Facebook-like distraction free mode
-  })
-
-  gitalk.render('gitalk-container')
-
-</script>
-
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://hxhc.github.io/post/ol7zw0Aqd">
+                <h3 class="post-title">
+                  Frp内网穿透及HTTP代理的实现
+                </h3>
+              </a>
+            </div>
           
-			  
+        </div>
+        
+          
+            <div class="paper" data-aos="fade-in">
+              <div id="gitalk-container"></div>
+            </div>
+          
+
           
         
-</div>
+      </div>
 
-
-
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://hxhc.github.io/images/avatar.png?v=1563184225537" class="no-responsive avatar">
+    <div class="text-muted">English version not available</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://hxhc.github.io/post/flfFwImnC">Windows下创建共享文件夹并映射网络驱动器</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://hxhc.github.io/post/ol7zw0Aqd">Frp内网穿透及HTTP代理的实现</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://hxhc.github.io/post/NNj0zXD8v"> Openwrt下实现无线中继</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://hxhc.github.io/post/KMfHau5E_">Linux服务器安装Matlab2017_多镜像文件版本</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://hxhc.github.io/tag/Software" class="badge ">
+          Software
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://hxhc.github.io/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
 
 
-
-      </div>
-
-
-
-
     </div>
 
-   <div class="footer">
-<link href="https://hxhc.github.io/styles/main.css" type="text/css" rel="stylesheet"/><div class="site_footer_wrap"><div class="site_footer">
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
-      <div class="mysocials"><div class="my_socials">
-		   
-			   
-    
-			   
-    
-			   
-    
-			   
-    
-</div><link href="https://hxhc.github.io/styles/main.css" type="text/css" rel="stylesheet"/>
+<script type="application/javascript">
 
-      </div>
+AOS.init();
 
-      <div class="copyright">Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-      </div>
+hljs.initHighlightingOnLoad()
 
-</div></div>
-
-    </div>
-
-
-<style type="text/css">a.back_to_top {
-    text-decoration: none;
-    position: fixed;
-    bottom: 40px;
-    right: 30px;
-    background: #f0f0f0;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    line-height: 36px;
-    font-size: 18px;
-    text-align: center;
-    transition-duration: .5s;
-    transition-propety: background-color;
-    display: none;
-}
-
-a.back_to_top span {
-    color: #888;
-}
-
-a.back_to_top:hover {
-    cursor: pointer;
-    background: #dfdfdf;
-}
-
-a.back_to_top:hover span {
-    color: #555;
-}
-
-@media print, screen and (max-width: 580px) {
-    .back_to_top {
-        display: none !important;
-    }
-}
-
-
-
-</style><a id="back_to_top" href="#" class="back_to_top"><span>△</span>
-</a>
-<script type="text/javascript" src="https://hxhc.github.io/media/scripts/jquery.js"></script>
-
-<script>$(document).ready((function(_this) {
-  return function() {
-    var bt;
-    bt = $('#back_to_top');
-    if ($(document).width() > 480) {
-      $(window).scroll(function() {
-        var st;
-        st = $(window).scrollTop();
-        if (st > 30) {
-          return bt.css('display', 'block');
-        } else {
-          return bt.css('display', 'none');
-        }
-      });
-      return bt.click(function() {
-        $('body,html').animate({
-          scrollTop: 0
-        }, 800);
-        return false;
-      });
-    }
-  };
-})(this));
 </script>
 
-</body>
 
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '2746a577092c892a1bcf',
+        clientSecret: 'f4c7791f4ecd0cc82dbc7c92be83dcc5bc4f9666',
+        repo: 'hxhc.github.io',
+        owner: 'hxhc',
+        admin: ['hxhc'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
 </html>
