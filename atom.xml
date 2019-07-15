@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hxhc.github.io</id>
     <title>HXHC Blog</title>
-    <updated>2019-07-11T08:50:30.390Z</updated>
+    <updated>2019-07-15T08:32:35.822Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hxhc.github.io"/>
     <link rel="self" href="https://hxhc.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://hxhc.github.io/images/avatar.png</logo>
     <icon>https://hxhc.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, HXHC Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[Windows下创建共享文件夹并映射网络驱动器]]></title>
+        <id>https://hxhc.github.io/post/flfFwImnC</id>
+        <link href="https://hxhc.github.io/post/flfFwImnC">
+        </link>
+        <updated>2019-07-15T08:21:47.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Frp内网穿透及HTTP代理的实现]]></title>
         <id>https://hxhc.github.io/post/ol7zw0Aqd</id>
