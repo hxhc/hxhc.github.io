@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hxhc.github.io</id>
     <title>HXHC Blog</title>
-    <updated>2019-07-15T08:32:35.822Z</updated>
+    <updated>2019-07-15T08:37:11.193Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hxhc.github.io"/>
     <link rel="self" href="https://hxhc.github.io/atom.xml"/>
@@ -16,6 +16,10 @@
         <link href="https://hxhc.github.io/post/flfFwImnC">
         </link>
         <updated>2019-07-15T08:21:47.000Z</updated>
+        <summary type="html"><![CDATA[<p>在仪器使用过程中，工作站电脑应以稳定作为首要目标，这也意味着一些其他服务最好放在其他电脑上，如文件共享等。可采用以下的网络架构来实现文件的共享和外部访问。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>在仪器使用过程中，工作站电脑应以稳定作为首要目标，这也意味着一些其他服务最好放在其他电脑上，如文件共享等。可采用以下的网络架构来实现文件的共享和外部访问。</p>
+]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[Frp内网穿透及HTTP代理的实现]]></title>
