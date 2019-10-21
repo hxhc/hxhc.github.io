@@ -1,186 +1,101 @@
-
 <html>
-  <head lang="zh">
-        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
-        <meta content="yes" name="apple-mobile-web-app-capable"/>
-        <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
-        <meta content="telephone=no" name="format-detection"/>
-        <meta name="renderer" content="webkit">
-    <title>Frp内网穿透及HTTP代理的实现 | HXHC Blog</title>
-<link href="https://hxhc.github.io/styles/main.css" type="text/css" rel="stylesheet"/>
-<script type="text/javascript" src="https://hxhc.github.io/media/scripts/jquery.js"></script>
-<script type="text/javascript" src="https://hxhc.github.io/media/scripts/basic.js"></script>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Frp内网穿透及HTTP代理的实现 | HXHC Blog</title>
+<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1571625417189">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://hxhc.github.io/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
 
   </head>
-
   <body>
-     <div class="header">
-      <div class="logo_title">
-		  
-        <div class="title animated fadeInDown"><img src="https://hxhc.github.io/images/avatar.png?v=1571623770436"/>
-
-          <h1 title="HXHC Blog" class="weaklink"><a href="/">HXHC Blog</a>
-
-          </h1>
-
-          <div class="navbar weaklink">
-            <div class="normal_nav">
-
-<div class="bitcron_nav_container">
-
-
-  <div class="bitcron_nav">
-    <div class="mixed_site_nav_wrap site_nav_wrap">
-		
-      <ul class="mixed_site_nav site_nav sm sm-base">
- 
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >Home</a>
-
-  </li>
- 
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >Archives</a>
-
-  </li>
- 
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >Tags</a>
-
-  </li>
- 
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >About</a>
-
-  </li>
- 
-
-      </ul>
-
-      <div class="clear clear_nav_inline_end"></div>
-
-    </div>
-
-  </div>
-
-
-
-  <div class="clear clear_nav_end"></div>
-
-</div>
-
-            </div>
-
-            <div class="hamberger"><i class="fa fa-bars"></i>
-<i class="fa fa-times"></i>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="hidden_nav animated fadeInDown">
-
-<div class="bitcron_nav_container">
-
-
-  <div class="bitcron_nav">
-    <div class="mixed_site_nav_wrap site_nav_wrap">
-      <ul class="mixed_site_nav site_nav sm sm-base">
-		  
-	
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >Home</a>
-
-  </li>
-
-
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >Archives</a>
-
-  </li>
-
-
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >Tags</a>
-
-  </li>
-
-
-  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >About</a>
-
-  </li>
-
-
-
-
-
-      </ul>
-
-      <div class="clear clear_nav_inline_end"></div>
-
-    </div>
-
-  </div>
-
-
-
-  <div class="clear clear_nav_end"></div>
-
-</div>
-
-      </div>
-
-    </div>
-
-
     <div class="main">
-      <div class="main-inner">
-
-
-<div class="content">
-
-
-
-
-
-
-  <div class="post_page" >
-
-<div class="post">
-  <div class="post_title sm_margin">
-    <h2><a>Frp内网穿透及HTTP代理的实现</a>
-
-
-
-    </h2>
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://hxhc.github.io">
+  <img class="avatar" src="https://hxhc.github.io/images/avatar.png?v=1571625417189" alt="">
+  </a>
+  <h1 class="site-title">
+    HXHC Blog
+  </h1>
+  <p class="site-description">
+    English version not available
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          Home
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          Archives
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          Tags
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          About
+        </a>
+      
+    
   </div>
-
-  <div class="post_details">
-    <div class="info"><i class="fa fa-clock-o"></i>
-<span class="date_info">2019-07-11</span>
-<i class="fa fa-eye"></i>
-
-<span class="date_info"><span id="busuanzi_value_page_pv"></span> Views</span>
-
-
-<i class="fa fa-bookmark-o"></i>
-<span class="tags_info weaklink">
-	
-	<a href="https://hxhc.github.io/tag/Software" class="tag">Software</a>
-
-
-</span>
-
-
-    </div>
-
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/hxhc" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
   </div>
+</div>
 
 
-
-
-
-  <div class="post_content markdown"><p class="md_block">
-    <span class="md_line md_line_start md_line_end"><p>随着互联网的快速发展和入网设备的增多，公网IPv4地址越来越稀罕。试想一下，如果你在家里或者在单位里搭建了一套网络服务，比如NAS，如果没有公网ip，又改如何在外连接呢？</p>
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Frp内网穿透及HTTP代理的实现
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2019-07-11 ·
+              </time>
+              
+                <a href="https://hxhc.github.io/tag/Software" class="post-tag">
+                  # Software
+                </a>
+              
+            </div>
+            
+              <div class="post-feature-image" style="background-image: url('https://pullzone1-stationx.netdna-ssl.com/wp-content/uploads/2014/12/penetration-testing-500.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p>随着互联网的快速发展和入网设备的增多，公网IPv4地址越来越稀罕。试想一下，如果你在家里或者在单位里搭建了一套网络服务，比如NAS，如果没有公网ip，又改如何在外连接呢？</p>
  <!-- more -->
 <p>内网穿透是一种非常常见和有用的技术，如当需要访问公司内网的计算机时，内网穿透技术就可派上用场。</p>
 <p>常用的内网穿透软件包括ngrok、zeroto向日葵等，<a href="https://github.com/fatedier/frp">frp</a>是国人开发的一款高性能内网穿透工具，具有相当强大灵活的功能。</p>
@@ -236,21 +151,23 @@ plugin_http_user = abc
 plugin_http_passwd = abc
 </code></pre>
 <p>关于如何设置http代理这最后一步，个人比较推荐采用proxyswitch omega这个插件来实现，在切换时比较方便，而windows全局代理显得太暴力了。此外，根据frp作者所说，采用插件的方式比起其他方法实现该功能，效率是较高的。</p>
-</p>
 
-     <p class="md_block">
-    <div class="reward"><div class="reward-button">赏 <span class="reward-code"> <span class="alipay-code"> <img class="alipay-img" src="https://hxhc.github.io/media/images/alipay.png"><b>支付宝扫码打赏</b> </span> <span class="wechat-code"> <img class="wechat-img" src="https://hxhc.github.io/media/images/wechat.png"><b>微信打赏</b> </span> </span></div></div>
-</p> 
-</div>
+            </div>
+          </article>
+        </div>
 
-</div>
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://hxhc.github.io/post/NNj0zXD8v">
+              <h3 class="post-title">
+                 Openwrt下实现无线中继
+              </h3>
+            </a>
+          </div>
+        
 
-
-
-<link href="https://hxhc.github.io/styles/main.css" type="text/css" rel="stylesheet"/>
-
-<div class="doc_comments">
-
+        
           
             <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
@@ -274,117 +191,20 @@ plugin_http_passwd = abc
 </script>
 
           
-			  
+
           
         
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://hxhc.github.io/atom.xml" target="_blank">RSS</a>
 </div>
 
-
-
-  </div>
-</div>
-
-
-
-      </div>
-
-
-
-
-    </div>
-
-   <div class="footer">
-<link href="https://hxhc.github.io/styles/main.css" type="text/css" rel="stylesheet"/><div class="site_footer_wrap"><div class="site_footer">
-
-      <div class="mysocials"><div class="my_socials">
-		   
-			   
-    
-			   
-    
-			   
-    
-			   
-    
-</div><link href="https://hxhc.github.io/styles/main.css" type="text/css" rel="stylesheet"/>
-
-      </div>
-
-      <div class="copyright">Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-      </div>
-
-</div></div>
-
-    </div>
-
-
-<style type="text/css">a.back_to_top {
-    text-decoration: none;
-    position: fixed;
-    bottom: 40px;
-    right: 30px;
-    background: #f0f0f0;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    line-height: 36px;
-    font-size: 18px;
-    text-align: center;
-    transition-duration: .5s;
-    transition-propety: background-color;
-    display: none;
-}
-
-a.back_to_top span {
-    color: #888;
-}
-
-a.back_to_top:hover {
-    cursor: pointer;
-    background: #dfdfdf;
-}
-
-a.back_to_top:hover span {
-    color: #555;
-}
-
-@media print, screen and (max-width: 580px) {
-    .back_to_top {
-        display: none !important;
-    }
-}
-
-
-
-</style><a id="back_to_top" href="#" class="back_to_top"><span>△</span>
-</a>
-<script type="text/javascript" src="https://hxhc.github.io/media/scripts/jquery.js"></script>
-
-<script>$(document).ready((function(_this) {
-  return function() {
-    var bt;
-    bt = $('#back_to_top');
-    if ($(document).width() > 480) {
-      $(window).scroll(function() {
-        var st;
-        st = $(window).scrollTop();
-        if (st > 30) {
-          return bt.css('display', 'block');
-        } else {
-          return bt.css('display', 'none');
-        }
-      });
-      return bt.click(function() {
-        $('body,html').animate({
-          scrollTop: 0
-        }, 800);
-        return false;
-      });
-    }
-  };
-})(this));
+<script>
+  hljs.initHighlightingOnLoad()
 </script>
 
-</body>
-
+      </div>
+    </div>
+  </body>
 </html>
