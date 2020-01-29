@@ -2,14 +2,14 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hxhc.github.io</id>
     <title>HXHC Blog</title>
-    <updated>2019-11-20T17:40:18.738Z</updated>
+    <updated>2020-01-29T08:12:29.999Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hxhc.github.io"/>
     <link rel="self" href="https://hxhc.github.io/atom.xml"/>
     <subtitle>English version not available</subtitle>
     <logo>https://hxhc.github.io/images/avatar.png</logo>
     <icon>https://hxhc.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2019, HXHC Blog</rights>
+    <rights>All rights reserved 2020, HXHC Blog</rights>
     <entry>
         <title type="html"><![CDATA[美利坚游记——ORLANDO]]></title>
         <id>https://hxhc.github.io/post/CljWvWcib</id>

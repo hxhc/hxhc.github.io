@@ -1,111 +1,106 @@
-
-<!DOCTYPE html>
 <html>
-  <head>
-    
-<meta charset="utf-8" >
-
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Windows下创建共享文件夹并映射网络驱动器 | HXHC Blog</title>
-<meta name="description" content="English version not available">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1574271615239">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1580283138557">
+<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://hxhc.github.io/styles/main.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/go.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+<!-- DEMO JS -->
+<script src="media/scripts/index.js"></script>
 
 
-  
-    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
-  
 
-  
-
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
-
-
-  </head>
-  <body>
-    <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="https://hxhc.github.io">
-        <img class="avatar" src="https://hxhc.github.io/images/avatar.png?v=1574271615239" alt="" width="32px" height="32px">
-      </a>
-      <a href="https://hxhc.github.io">
-        <h1 class="site-title">HXHC Blog</h1>
-      </a>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            HXHC Blog
+        </div>
     </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
-    </div>
-  </div>
-</div>
-
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
-      
-        
-          <a href="/" class="menu purple-link">
-            Home
-          </a>
-        
-      
-        
-          <a href="/archives" class="menu purple-link">
-            Archives
-          </a>
-        
-      
-        
-          <a href="/tags" class="menu purple-link">
-            Tags
-          </a>
-        
-      
-        
-          <a href="/post/about" class="menu purple-link">
-            About
-          </a>
-        
-      
-    </div>
-  </div>
-</transition>
-
-
-      <div class="content-container">
-        <div class="post-detail">
-          
-            <div class="feature-container" style="background-image: url('https://helpdeskgeek.com/wp-content/pictures/2019/04/share-files.png.webp')">
-            </div>
-          
-          <h2 class="post-title">Windows下创建共享文件夹并映射网络驱动器</h2>
-          <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2019-07-15</span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
             
-              <span>
-                <i class="icon-pricetags-outline"></i>
-                
-                  <a href="https://hxhc.github.io/tag/Software">
-                    Software
+                <div class="nav-item">
                     
-                  </a>
-                
-              </span>
+                        <a href="/" class="menu gt-a-link">
+                            Home
+                        </a>
+                    
+                </div>
             
-          </div>
-          <div class="post-content">
-            <p>在仪器使用过程中，工作站电脑应以稳定作为首要目标，这也意味着一些其他服务最好放在其他电脑上，如文件共享等。可采用以下的网络架构来实现文件的共享和外部访问。</p>
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            Archives
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            Tags
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            About
+                        </a>
+                    
+                </div>
+            
+        </div>
+    </div>
+</nav>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Windows下创建共享文件夹并映射网络驱动器
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2019-07-15 ·
+                    </time>
+                    
+                        <a href="https://hxhc.github.io/tag/Software" class="post-tags">
+                            # Software
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>在仪器使用过程中，工作站电脑应以稳定作为首要目标，这也意味着一些其他服务最好放在其他电脑上，如文件共享等。可采用以下的网络架构来实现文件的共享和外部访问。</p>
 <!-- more -->
 <h2 id="简单的架构">简单的架构</h2>
 <ol>
@@ -113,24 +108,24 @@
 <li>在文件服务器上创建一个共享文件夹，并将该文件夹映射作为网络驱动器到工作站上。</li>
 <li>仪器产生的文件可以直接存储到文件服务器上，文件服务器通过ftp等将文件分享给外网用户（此处的外网指工作站所在局域网外的网络环境）。</li>
 </ol>
-<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2019/07/15/5d2c3883874a039677.jpg" alt="资源 1"></figure>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2019/07/15/5d2c3883874a039677.jpg" alt="资源 1" loading="lazy"></figure>
 <h2 id="具体设置">具体设置</h2>
 <h3 id="1-文件服务器设置共享文件夹">1. 文件服务器设置共享文件夹</h3>
 <ul>
 <li>首先确保文件服务器开启了网络发现功能和文件共享功能</li>
 </ul>
-<figure data-type="image" tabindex="2"><img src="https://i.loli.net/2019/07/15/5d2c38bd4317a68061.png" alt="1563175001661"></figure>
+<figure data-type="image" tabindex="2"><img src="https://i.loli.net/2019/07/15/5d2c38bd4317a68061.png" alt="1563175001661" loading="lazy"></figure>
 <ul>
 <li>右键欲共享的文件夹 -- <code>属性</code>-- <code>共享</code> -- <code>高级共享</code>， 勾选<code>共享此文件夹</code>， 共享设置完毕</li>
 </ul>
-<figure data-type="image" tabindex="3"><img src="https://i.loli.net/2019/07/15/5d2c39582b03b57514.png" alt="1563174824013"></figure>
+<figure data-type="image" tabindex="3"><img src="https://i.loli.net/2019/07/15/5d2c39582b03b57514.png" alt="1563174824013" loading="lazy"></figure>
 <ul>
 <li>
 <p>设置完毕后后，应该可以在本机的网络中看到自己共享的文件夹</p>
 <p>此处，计算机名为<code>WIN10</code>, 共享文件夹为<code>其他</code>文件夹，在资源管理器中输入<code>\\WIN10</code>，可以发现<code>其他</code>文件夹是存在的，表明共享成功</p>
 </li>
 </ul>
-<figure data-type="image" tabindex="4"><img src="https://i.loli.net/2019/07/15/5d2c396ca7d0732846.png" alt="1563175657964"></figure>
+<figure data-type="image" tabindex="4"><img src="https://i.loli.net/2019/07/15/5d2c396ca7d0732846.png" alt="1563175657964" loading="lazy"></figure>
 <h3 id="2-映射网络驱动器">2. 映射网络驱动器</h3>
 <p>用网线连接工作站和文件服务器，设置与工作站相连的那张文件服务器网卡的IP地址为自动获取（由于工作站工作站也可能通过以太网与设备相连，因此最好不用更改工作站的IP地址，更改文件服务器的IP无此问题）。</p>
 <ul>
@@ -139,8 +134,8 @@
 </li>
 <li>
 <p>打开工作站的资源管理器，右键左侧的<code>这台电脑</code>，选择<code>映射网络驱动器</code>，输入相应的账户密码，将<code>其他</code>文件夹挂载为<code>Z</code>盘</p>
-<figure data-type="image" tabindex="5"><img src="https://i.loli.net/2019/07/15/5d2c39843647665800.png" alt="1563176045999"></figure>
-<figure data-type="image" tabindex="6"><img src="https://i.loli.net/2019/07/15/5d2c399a686bf59999.png" alt="1563176908215"></figure>
+<figure data-type="image" tabindex="5"><img src="https://i.loli.net/2019/07/15/5d2c39843647665800.png" alt="1563176045999" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://i.loli.net/2019/07/15/5d2c399a686bf59999.png" alt="1563176908215" loading="lazy"></figure>
 </li>
 </ul>
 <p>至此，网络驱动器映射完毕，可以将仪器产生的文件直接保存在<code>Z</code>盘</p>
@@ -150,86 +145,73 @@
 <li>在防火墙处，在入站规则与出站规则处，将ftp软件列入允许名单中</li>
 </ul>
 
-          </div>
+                </div>
+            </article>
         </div>
 
         
-          <div class="next-post">
-            <a class="purple-link" href="https://hxhc.github.io/post/ol7zw0Aqd">
-              <h3 class="post-title">
-                下一篇：Frp内网穿透及HTTP代理的实现
-              </h3>
-            </a>
-          </div>
-          
-      </div>
-
-      
-        
-          <div id="gitalk-container"></div>
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://hxhc.github.io/post/ol7zw0Aqd" class="post-title gt-a-link">
+                    Frp内网穿透及HTTP代理的实现
+                </a>
+            </div>
         
 
         
-      
+            
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 
-      <div class="site-footer">
-  <div class="slogan">English version not available</div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://hxhc.github.io/atom.xml" target="_blank">RSS</a>
-</div>
+<div id="gitalk-container"></div>
 
+<script>
 
-    </div>
-    <script type="application/javascript">
+  var gitalk = new Gitalk({
+    clientID: '2746a577092c892a1bcf',
+    clientSecret: 'f4c7791f4ecd0cc82dbc7c92be83dcc5bc4f9666',
+    repo: 'hxhc.github.io',
+    owner: 'hxhc',
+    admin: ['hxhc'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
 
-hljs.initHighlightingOnLoad()
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+  gitalk.render('gitalk-container')
 
 </script>
 
+            
+
+            
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">English version not available</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a href="https://hxhc.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+    hljs.initHighlightingOnLoad()
+</script>
 
 
-  
-    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-    <script>
-
-      var gitalk = new Gitalk({
-        clientID: '2746a577092c892a1bcf',
-        clientSecret: 'f4c7791f4ecd0cc82dbc7c92be83dcc5bc4f9666',
-        repo: 'hxhc.github.io',
-        owner: 'hxhc',
-        admin: ['hxhc'],
-        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
-        distractionFreeMode: false  // Facebook-like distraction free mode
-      })
-
-      gitalk.render('gitalk-container')
-
-    </script>
-  
-
-  
-
-
-
-
-  </body>
+    </div>
+</div>
+</body>
 </html>
