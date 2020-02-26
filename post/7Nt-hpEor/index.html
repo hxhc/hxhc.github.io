@@ -3,7 +3,7 @@
     <meta charset="utf-8"/>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Frp内网穿透及HTTP代理的实现 | HXHC Blog</title>
+<title>美利坚游记——Michigan | HXHC Blog</title>
 <link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1582702179854">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://hxhc.github.io/styles/main.css">
@@ -87,75 +87,17 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    Frp内网穿透及HTTP代理的实现
+                    美利坚游记——Michigan
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2019-07-11 ·
+                        · 2019-11-20 ·
                     </time>
-                    
-                        <a href="https://hxhc.github.io/tag/Software" class="post-tags">
-                            # Software
-                        </a>
                     
                 </div>
                 <div class="post-content">
-                    <p>随着互联网的快速发展和入网设备的增多，公网IPv4地址越来越稀罕。试想一下，如果你在家里或者在单位里搭建了一套网络服务，比如NAS，如果没有公网ip，又改如何在外连接呢？</p>
- <!-- more -->
-<p>内网穿透是一种非常常见和有用的技术，如当需要访问公司内网的计算机时，内网穿透技术就可派上用场。</p>
-<p>常用的内网穿透软件包括ngrok、zeroto向日葵等，<a href="https://github.com/fatedier/frp">frp</a>是国人开发的一款高性能内网穿透工具，具有相当强大灵活的功能。</p>
-<h2 id="应用">应用</h2>
-<p>此处不赘述frp的原理，只简单的介绍frp的应用。</p>
-<p>使用frp需要一台具有公网ip的服务器，推荐使用国内的服务器，国外的服务器由于延迟的原因使用体验非常差。</p>
-<h3 id="服务器端设置">服务器端设置</h3>
-<p>选用阿里云的轻量服务器，首先根据服务器平台下载相应的软件。在服务器主要设置frps.ini这个文件。服务器端的设置主要就这么一些，其他功能配置基本在客户端完成。</p>
-<pre><code class="language-ini">[common]
-# A literal address or host name for IPv6 must be enclosed
-# in square brackets, as in &quot;[::1]:80&quot;, &quot;[ipv6-host]:http&quot; or &quot;[ipv6-host%zone]:80&quot;
-bind_addr = 0.0.0.0
-bind_port = 7000
-
-# udp port to help make udp hole to penetrate nat
-bind_udp_port = 7001
-
-# udp port used for kcp protocol, it can be same with 'bind_port'
-# if not set, kcp is disabled in frps
-kcp_bind_port = 7000
-
-
-dashboard_addr = 0.0.0.0
-dashboard_port = 7500
-
-dashboard_user = admin
-dashboard_pwd = admin
-
-token = 12345678
-</code></pre>
-<h3 id="客户端设置校园内的设备">客户端设置（校园内的设备）</h3>
-<p>由于经常不在学校，很多学术数据库都是ip控制的，比如IEEE（在这里为Elsevier鼓掌，<a href="https://www.elsevier.com/solutions/sciencedirect/support/sd-tutorials/activating-using-remote-access-sciencedirect">remote access</a>功能非常好用，任何地方都不用担心不能查阅文献），所以我需要的功能是在外浏览这些学术期刊时，可以通过内网穿透，用学校的ip进行访问。</p>
-<p>实现的方法有很多，比如在客户端建立vpn，把客户端作为shadowsocks服务器以及其他一些方法。但是如果只是为了实现以上功能，frp提供了一个<a href="%5Bhttps://github.com/fatedier/frp/blob/master/README_zh.md#%E6%8F%92%E4%BB%B6%5D(https://github.com/fatedier/frp/blob/master/README_zh.md#%E6%8F%92%E4%BB%B6)">http_proxy插件</a>，非常简单和高效。</p>
-<p>配置参考官方readme，也没什么可说的。之后再本地运行frpc即可。以下配置实现了ssh和http代理的功能，在浏览学术期刊时，通过该http代理，即可愉快（真的吗？）地科研了。</p>
-<pre><code class="language-ini"># frpc.ini
-[common]
-server_addr = x.x.x.x
-server_port = 7000
-
-# If ssh needed
-[ssh]
-type = tcp
-local_ip = 127.0.0.1
-local_port = 22
-remote_port = 6000
-
-# http_proxy_plugin
-[http_proxy]
-type = tcp
-remote_port = 6000
-plugin = http_proxy
-plugin_http_user = abc
-plugin_http_passwd = abc
-</code></pre>
-<p>关于如何设置http代理这最后一步，个人比较推荐采用proxyswitch omega这个插件来实现，在切换时比较方便，而windows全局代理显得太暴力了。此外，根据frp作者所说，采用插件的方式比起其他方法实现该功能，效率是较高的。</p>
+                    <p>密西根</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>e</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">e=mc^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></p>
 
                 </div>
             </article>
@@ -164,8 +106,8 @@ plugin_http_passwd = abc
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://hxhc.github.io/post/NNj0zXD8v" class="post-title gt-a-link">
-                     Openwrt下实现无线中继
+                <a href="https://hxhc.github.io/post/CljWvWcib" class="post-title gt-a-link">
+                    美利坚游记——ORLANDO
                 </a>
             </div>
         
