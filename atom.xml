@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hxhc.github.io</id>
     <title>HXHC Blog</title>
-    <updated>2020-02-26T07:29:51.045Z</updated>
+    <updated>2020-02-27T15:43:07.559Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hxhc.github.io"/>
     <link rel="self" href="https://hxhc.github.io/atom.xml"/>
@@ -11,11 +11,15 @@
     <icon>https://hxhc.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, HXHC Blog</rights>
     <entry>
-        <title type="html"><![CDATA[美利坚游记——Michigan]]></title>
-        <id>https://hxhc.github.io/post/7Nt-hpEor</id>
-        <link href="https://hxhc.github.io/post/7Nt-hpEor">
+        <title type="html"><![CDATA[Kennard-Stone algorithm and SPXY algorithm and python implementation]]></title>
+        <id>https://hxhc.github.io/post/kennardstone-spxy</id>
+        <link href="https://hxhc.github.io/post/kennardstone-spxy">
         </link>
-        <updated>2019-11-20T04:48:49.000Z</updated>
+        <updated>2020-02-27T15:20:47.000Z</updated>
+        <summary type="html"><![CDATA[<p>Kennard-Stone (KS) and SPXY algorithms are common sample split algorithms in the chemometrics field.. Unlike random split, these two methods are based on the so called &quot;maximum minimum distance&quot;, which means the split result of KS and SPXY are definite instead of random. This article will briefly introduce these 2 algorithms and provide a python implementation.</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Kennard-Stone (KS) and SPXY algorithms are common sample split algorithms in the chemometrics field.. Unlike random split, these two methods are based on the so called &quot;maximum minimum distance&quot;, which means the split result of KS and SPXY are definite instead of random. This article will briefly introduce these 2 algorithms and provide a python implementation.</p>
+]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[美利坚游记——ORLANDO]]></title>
