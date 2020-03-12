@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1583989277898">
+<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1583989294041">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://hxhc.github.io/styles/main.css">
 
@@ -36,7 +36,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://hxhc.github.io">
-        <img class="avatar" src="https://hxhc.github.io/images/avatar.png?v=1583989277898" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://hxhc.github.io/images/avatar.png?v=1583989294041" alt="" width="32px" height="32px">
       </a>
       <a href="https://hxhc.github.io">
         <h1 class="site-title">HXHC Blog</h1>
@@ -106,6 +106,7 @@
           </div>
           <div class="post-content">
             <p>Kennard-Stone (KS) and SPXY algorithms are common sample split algorithms in the chemometrics field. Unlike random split, these two methods are based on the so called &quot;maximum minimum distance&quot;, which means the split result of KS and SPXY are definite instead of random. This article will briefly introduce these 2 algorithms and provide the python implementation.</p>
+<!-- more -->
 <h2 id="background">Background</h2>
 <p>Multivariate data analysis is a pillar of chemometrics, and multi-dimensional data are quite easily acquired  in the presence of new instruments, such as spectrometers. Multi-dimensional data should be carefully split into train, validation, and test set to build chemometrics models. Random split is a common choice, but the models can vary due to different split results.  What's worse,  random split can't assure a proper split result, i.e., the subsets after split can't not represent the  original dataset. So many researches have investigated how to select  a representative subset from a large dataset.</p>
 <p>KS and SPXY algorithms are commonly used in spectra analysis. The 2 methods can select samples uniformly from a pool of <em>n</em> samples. KS algorithm are conducted based on the similarity of independent variables (<em><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span></em>) between the subset and the original set, while SPXY combines  independent and dependent variables (<em><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span></em>)<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>. They are very similar, both selecting subset samples by maximum minimum distance.</p>
