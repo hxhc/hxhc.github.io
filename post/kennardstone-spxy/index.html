@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1584073143027">
+<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1584778845125">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://hxhc.github.io/styles/main.css">
 
@@ -36,7 +36,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://hxhc.github.io">
-        <img class="avatar" src="https://hxhc.github.io/images/avatar.png?v=1584073143027" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://hxhc.github.io/images/avatar.png?v=1584778845125" alt="" width="32px" height="32px">
       </a>
       <a href="https://hxhc.github.io">
         <h1 class="site-title">HXHC Blog</h1>
@@ -268,7 +268,7 @@ def kennardstone(spectra, test_size=0.25, metric='euclidean', *args, **kwargs):
     return select_pts, remaining_pts
 
 
-def spxy(spectra, yvalues, test_size=0.25, metrics='euclidean', *args, **kwargs):
+def spxy(spectra, yvalues, test_size=0.25, metric='euclidean', *args, **kwargs):
     &quot;&quot;&quot;SPXY Sample Split method
     Parameters
     ----------
@@ -299,8 +299,8 @@ def spxy(spectra, yvalues, test_size=0.25, metrics='euclidean', *args, **kwargs)
 
     if train_size &gt; 2:
         yvalues = yvalues.reshape(yvalues.shape[0], -1)
-        distance_spectra = cdist(spectra, spectra, metric=metrics, *args, **kwargs)
-        distance_y = cdist(yvalues, yvalues, metric=metrics, *args, **kwargs)
+        distance_spectra = cdist(spectra, spectra, metric=metric, *args, **kwargs)
+        distance_y = cdist(yvalues, yvalues, metric=metric, *args, **kwargs)
         distance_spectra = distance_spectra / distance_spectra.max()
         distance_y = distance_y / distance_y.max()
 
@@ -358,6 +358,7 @@ def max_min_distance_split(distance, train_size):
                 remaining_pts.remove(point)
                 break
     return select_pts, remaining_pts
+
 </code></pre>
 <hr class="footnotes-sep">
 <section class="footnotes">
