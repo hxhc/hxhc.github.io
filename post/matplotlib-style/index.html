@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1594219758662">
+<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1594219892192">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://hxhc.github.io/styles/main.css">
 
@@ -36,7 +36,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://hxhc.github.io">
-        <img class="avatar" src="https://hxhc.github.io/images/avatar.png?v=1594219758662" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://hxhc.github.io/images/avatar.png?v=1594219892192" alt="" width="32px" height="32px">
       </a>
       <a href="https://hxhc.github.io">
         <h1 class="site-title">HXHC Blog</h1>
@@ -143,17 +143,17 @@
 <li>......</li>
 </ul>
 <h3 id="drawbacks-of-origin-lab-software">drawbacks of Origin Lab software</h3>
-<p>I have to admit that Origin Lab is a wonderful graph software and quite easy to use for newbies and experts. It is quick to create a simple graph by clicking some buttons, and all operations can be done visually without any coding.<br>
-However, when creating some complex pictures, Origin's default settings are not good enough. For example, when creating multiple subplots (the term <code>subplot</code> is consistent with matplotlib's API), I usually choose the <code>merge</code> function to gather all the subplots into one graph. But aligning all the subplots would often be a mess even if the individual plots perform perfectly. It is somewhat confusing to make all subplots' sizes perfect. Below is an example. The biggest problem is the size doesn't fit and there are many other small issue.<br>
-<img src="https://i.loli.net/2020/07/08/RADiuQKF6Nb7Icp.png" alt="before merge" loading="lazy"><br>
+<p>I have to admit that Origin Lab is a wonderful graph software and quite easy to use for newbies and experts. It is quick to create a simple graph by clicking some buttons, and all operations can be done visually without any coding.</p>
+<p>However, when creating some complex pictures, Origin's default settings are not good enough. For example, when creating multiple subplots (the term <code>subplot</code> is consistent with matplotlib's API), I usually choose the <code>merge</code> function to gather all the subplots into one graph. But aligning all the subplots would often be a mess even if the individual plots perform perfectly. It is somewhat confusing to make all subplots' sizes perfect. Below is an example. The biggest problem is the size doesn't fit and there are many other small issue.</p>
+<p><img src="https://i.loli.net/2020/07/08/RADiuQKF6Nb7Icp.png" alt="before merge" loading="lazy"><br>
 <img src="https://i.loli.net/2020/07/08/9jYAfd6NM23khym.png" alt="after merge" loading="lazy"></p>
 <h2 id="matplotlib-style">Matplotlib style</h2>
 <p>It is certain that most elements of both Origin Lab graphs and matplotlib graphs can be optimized. The problem might be that you should be very familiar with them. As far as I know, the customized format style of Origin Lab and matplotlib can be saved for further use. But it seems not easy for Origin Lab to remember the alignment settings for multiple subplots, which exhausted my patience.</p>
 <blockquote>
-<p>天下苦Origin久矣。<br>
-So, when I found the project <em><a href="https://github.com/garrettj403/SciencePlots">SciencePlots</a></em>, I feel like boarding Noah's Ark. This project contains several matplotlib style files which can be simply used by <code>plt.style.use('scicence')</code>.<br>
-This project opens my mind and soon I modified the style file in order to meet my requirements. The usage of the style files is like <code>ggtheme</code> in <code>ggplot2</code>, which, I accidentally met some years ago.</p>
+<p>天下苦Origin久矣。</p>
 </blockquote>
+<p>So, when I found the project <em><a href="https://github.com/garrettj403/SciencePlots">SciencePlots</a></em>, I feel like boarding Noah's Ark. This project contains several matplotlib style files which can be simply used by <code>plt.style.use('scicence')</code>.</p>
+<p>This project opens my mind and soon I modified the style file in order to meet my requirements. The usage of the style files is like <code>ggtheme</code> in <code>ggplot2</code>, which, I accidentally met some years ago.</p>
 <h3 id="style-configuration">Style configuration</h3>
 <p>Here I simply put my configuration file for some explanation.</p>
 <pre><code class="language-yaml"># It is a modified version of garrettj403/SciencePlots/science.mplstyle
