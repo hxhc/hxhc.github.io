@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hxhc.github.io</id>
     <title>HXHC Blog</title>
-    <updated>2020-07-08T14:39:27.302Z</updated>
+    <updated>2020-07-08T14:40:30.059Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hxhc.github.io"/>
     <link rel="self" href="https://hxhc.github.io/atom.xml"/>
@@ -16,11 +16,9 @@
         <link href="https://hxhc.github.io/post/matplotlib-style/">
         </link>
         <updated>2020-07-08T12:40:34.000Z</updated>
-        <summary type="html"><![CDATA[<h2 id="intro">Intro</h2>
-<p>Working or sleeping, I dream of pictures - usually of rather fancy pictures on academic journals. When I think how briliant pictures impact my feelings, I wonder about the code behind, for I am extremely tired of, and frightened by making plots by hand in <a href="https://www.originlab.com/">Origin Lab</a> or some other softwares.</p>
+        <summary type="html"><![CDATA[<p>Working or sleeping, I dream of pictures - usually of rather fancy pictures on academic journals. When I think how briliant pictures impact my feelings, I wonder about the code behind, for I am extremely tired of, and frightened by making plots by hand in <a href="https://www.originlab.com/">Origin Lab</a> or some other softwares.</p>
 ]]></summary>
-        <content type="html"><![CDATA[<h2 id="intro">Intro</h2>
-<p>Working or sleeping, I dream of pictures - usually of rather fancy pictures on academic journals. When I think how briliant pictures impact my feelings, I wonder about the code behind, for I am extremely tired of, and frightened by making plots by hand in <a href="https://www.originlab.com/">Origin Lab</a> or some other softwares.</p>
+        <content type="html"><![CDATA[<p>Working or sleeping, I dream of pictures - usually of rather fancy pictures on academic journals. When I think how briliant pictures impact my feelings, I wonder about the code behind, for I am extremely tired of, and frightened by making plots by hand in <a href="https://www.originlab.com/">Origin Lab</a> or some other softwares.</p>
 ]]></content>
     </entry>
     <entry>
