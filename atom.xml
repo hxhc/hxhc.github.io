@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hxhc.github.io</id>
     <title>HXHC Blog</title>
-    <updated>2020-07-08T14:36:11.404Z</updated>
+    <updated>2020-07-08T14:39:27.302Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hxhc.github.io"/>
     <link rel="self" href="https://hxhc.github.io/atom.xml"/>
@@ -12,8 +12,8 @@
     <rights>All rights reserved 2020, HXHC Blog</rights>
     <entry>
         <title type="html"><![CDATA[Using matplotlib to create publishable pictures]]></title>
-        <id>https://hxhc.github.io/post/oV6M3KLrB/</id>
-        <link href="https://hxhc.github.io/post/oV6M3KLrB/">
+        <id>https://hxhc.github.io/post/matplotlib-style/</id>
+        <link href="https://hxhc.github.io/post/matplotlib-style/">
         </link>
         <updated>2020-07-08T12:40:34.000Z</updated>
         <summary type="html"><![CDATA[<h2 id="intro">Intro</h2>
