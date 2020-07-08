@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1594219226848">
+<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1594219758662">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://hxhc.github.io/styles/main.css">
 
@@ -36,7 +36,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://hxhc.github.io">
-        <img class="avatar" src="https://hxhc.github.io/images/avatar.png?v=1594219226848" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://hxhc.github.io/images/avatar.png?v=1594219758662" alt="" width="32px" height="32px">
       </a>
       <a href="https://hxhc.github.io">
         <h1 class="site-title">HXHC Blog</h1>
@@ -105,7 +105,7 @@
             
           </div>
           <div class="post-content">
-            <p>Working or sleeping, I dream of pictures - usually of rather fancy pictures on academic journals. When I think how briliant pictures impact my feelings, I wonder about the code behind, for I am extremely tired of, and frightened by making plots by hand in <a href="https://www.originlab.com/">Origin Lab</a> or some other softwares.</p>
+            <p>Working or sleeping, I dream of pictures - usually of rather fancy pictures on academic journals. When I think how brilliant pictures impact my feelings, I wonder about the code behind, for I am extremely tired of, and frightened by making plots by hand in <a href="https://www.originlab.com/">Origin Lab</a> or some other software.</p>
 <!-- more -->
 <p><ul class="markdownIt-TOC">
 <li>
@@ -130,12 +130,12 @@
 <p>Usually my workflow of creating academic picture is:</p>
 <ol>
 <li>Doing data analysis using python</li>
-<li>Exporting result data to excel files or csv files</li>
+<li>Exporting result data to Excel files or CSV files</li>
 <li>Copying result data into Origin Lab and making some graphs</li>
-<li>Ajusting graph details endlessly</li>
+<li>Adjusting graph details endlessly</li>
 </ol>
 <h3 id="drawbacks-of-matplotlib">drawbacks of matplotlib</h3>
-<p>Someone may ask why not use <a href="https://matplotlib.org/">matplotlib</a> to make graphs, for this would avoid using other softwares. Sure, it is absolutely right. And I appreciate directly using matplotlib to create graphs much. The problem is, the default style of matplotlib is far from satisfactory. Lots of details need to be changed and below is an uncompleted list:</p>
+<p>Someone may ask why not use <a href="https://matplotlib.org/">matplotlib</a> to make graphs, for this would avoid using other software. Sure, it is absolutely right. And I appreciate directly using matplotlib to create graphs much. The problem is, the default style of matplotlib is far from satisfactory. Lots of details need to be changed and below is an uncompleted list:</p>
 <ul>
 <li>The default font size are too small</li>
 <li>The default linewidth is too thin</li>
@@ -143,28 +143,28 @@
 <li>......</li>
 </ul>
 <h3 id="drawbacks-of-origin-lab-software">drawbacks of Origin Lab software</h3>
-<p>I have to admit that Origin Lab is a wonderful graph software and quite easy to use for newbies and experts. It is quick to create a simple graph by clicking some buttons, and all operations can be done visually without any coding.</p>
-<p>However, when creating some complex pictures, Origin's default settings are not good enough. For example, when creating multiple subplots (the term <code>subplot</code> is consistent with matplotlib's API), I usually choose the <code>merge</code> function to gather all the subplots into one graph. But aligning all the subplots would often be a mess even if the individual plots perform perfectly. It is somewhat confusing to make all subplots' sizes perfect. Below is an example. The biggest problem is the size doesn't fit and there are many other small issue.</p>
-<p><img src="https://i.loli.net/2020/07/08/RADiuQKF6Nb7Icp.png" alt="before merge" loading="lazy"><br>
+<p>I have to admit that Origin Lab is a wonderful graph software and quite easy to use for newbies and experts. It is quick to create a simple graph by clicking some buttons, and all operations can be done visually without any coding.<br>
+However, when creating some complex pictures, Origin's default settings are not good enough. For example, when creating multiple subplots (the term <code>subplot</code> is consistent with matplotlib's API), I usually choose the <code>merge</code> function to gather all the subplots into one graph. But aligning all the subplots would often be a mess even if the individual plots perform perfectly. It is somewhat confusing to make all subplots' sizes perfect. Below is an example. The biggest problem is the size doesn't fit and there are many other small issue.<br>
+<img src="https://i.loli.net/2020/07/08/RADiuQKF6Nb7Icp.png" alt="before merge" loading="lazy"><br>
 <img src="https://i.loli.net/2020/07/08/9jYAfd6NM23khym.png" alt="after merge" loading="lazy"></p>
 <h2 id="matplotlib-style">Matplotlib style</h2>
-<p>It is sure that most elements of both Origin Lab graphs and matplotlib graphs can be optimized. The problem might be that you should be very familiar with them. As far as I know, the customized format style of Origin Lab and matplotlib can be saved for further use. But it seems not easy for Origin Lab to remember the alignment settings for multiple subplots, which exhausted my patience.</p>
+<p>It is certain that most elements of both Origin Lab graphs and matplotlib graphs can be optimized. The problem might be that you should be very familiar with them. As far as I know, the customized format style of Origin Lab and matplotlib can be saved for further use. But it seems not easy for Origin Lab to remember the alignment settings for multiple subplots, which exhausted my patience.</p>
 <blockquote>
-<p>天下苦Origin久矣。</p>
+<p>天下苦Origin久矣。<br>
+So, when I found the project <em><a href="https://github.com/garrettj403/SciencePlots">SciencePlots</a></em>, I feel like boarding Noah's Ark. This project contains several matplotlib style files which can be simply used by <code>plt.style.use('scicence')</code>.<br>
+This project opens my mind and soon I modified the style file in order to meet my requirements. The usage of the style files is like <code>ggtheme</code> in <code>ggplot2</code>, which, I accidentally met some years ago.</p>
 </blockquote>
-<p>So, when I found the project <em><a href="https://github.com/garrettj403/SciencePlots">SciencePlots</a></em>, I feel like boarding Noah's Ark. This project contains several matplotlib style files which can be simply used by <code>plt.style.use('scicence')</code>.</p>
-<p>This project opens my mind and soon I modified the style file in order to meet my requirements. The usage of the style files is like <code>ggtheme</code> in <code>ggplot2</code>, which, I accidentally meet some years ago.</p>
 <h3 id="style-configuration">Style configuration</h3>
-<p>Here I simply put my configuration file for some explaination.</p>
+<p>Here I simply put my configuration file for some explanation.</p>
 <pre><code class="language-yaml"># It is a modified version of garrettj403/SciencePlots/science.mplstyle
 # (https://github.com/garrettj403/SciencePlots/blob/master/styles/science.mplstyle)
-
+ 
 # Set color cycle: using vibrant palette, color-blind safe
 axes.prop_cycle : cycler('color', ['0077BB', '33BBEE', '009988', 'EE7733', 'CC3311', 'EE3377', 'BBBBBB'])
-
+ 
 # Set default figure size
 figure.figsize : 8, 6
-
+ 
 # Set font size
 # Large font size helps clear vision when the graph is zoomed out
 legend.fontsize: 24
@@ -173,7 +173,7 @@ axes.titlesize: 28
 xtick.labelsize: 28
 ytick.labelsize: 28
 axes.titlepad: 10
-
+ 
 # Set x axis
 # large ticks are also needed
 xtick.direction : in
@@ -183,7 +183,7 @@ xtick.minor.size : 4
 xtick.minor.width : 1
 xtick.minor.visible : True
 xtick.top : True
-
+ 
 # Set y axis
 ytick.direction : in
 ytick.major.size : 6
@@ -192,7 +192,7 @@ ytick.minor.size : 4
 ytick.minor.width : 1
 ytick.minor.visible : True
 ytick.right : True
-
+ 
 # Set line widths
 # think linewidth and big scatter points are also needed
 axes.linewidth : 2
@@ -200,14 +200,14 @@ grid.linewidth : 1
 lines.linewidth : 3
 lines.markersize : 10
 axes.grid : False
-
+ 
 # Remove legend frame
 legend.frameon : False
-
+ 
 # Always save as 'tight'
 savefig.bbox : tight
 savefig.pad_inches : 0.05
-
+ 
 # Use sans-serif fonts
 # Times New Roman or Arial are for serif and sans, respectively
 # If CJK characters are necessary, change font-family to Microsoft Yahei
