@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>Using matplotlib to create publishable pictures | HXHC Blog</title>
+<meta name="description" content="Great ideas in mind, poor words on paper">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1594218968756">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://hxhc.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://hxhc.github.io">
+        <img class="avatar" src="https://hxhc.github.io/images/avatar.png?v=1594218968756" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://hxhc.github.io">
+        <h1 class="site-title">HXHC Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            Home
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            Archives
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            Tags
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            About
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">Using matplotlib to create publishable pictures</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-07-08</span>
+            
+          </div>
+          <div class="post-content">
+            <h2 id="intro">Intro</h2>
+<p>Working or sleeping, I dream of pictures - usually of rather fancy pictures on academic journals. When I think how briliant pictures impact my feelings, I wonder about the code behind, for I am extremely tired of, and frightened by making plots by hand in <a href="https://www.originlab.com/">Origin Lab</a> or some other softwares.</p>
+<!-- more -->
+<p><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#intro">Intro</a></li>
+<li><a href="#current-status">Current status</a>
+<ul>
+<li><a href="#drawbacks-of-matplotlib">drawbacks of matplotlib</a></li>
+<li><a href="#drawbacks-of-origin-lab-software">drawbacks of Origin Lab software</a></li>
+</ul>
+</li>
+<li><a href="#matplotlib-style">Matplotlib style</a>
+<ul>
+<li><a href="#style-configuration">Style configuration</a></li>
+<li><a href="#demo-graphs">demo graphs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</p>
+<h2 id="current-status">Current status</h2>
+<p>Usually my workflow of creating academic picture is:</p>
+<ol>
+<li>Doing data analysis using python</li>
+<li>Exporting result data to excel files or csv files</li>
+<li>Copying result data into Origin Lab and making some graphs</li>
+<li>Ajusting graph details endlessly</li>
+</ol>
+<h3 id="drawbacks-of-matplotlib">drawbacks of matplotlib</h3>
+<p>Someone may ask why not use <a href="https://matplotlib.org/">matplotlib</a> to make graphs, for this would avoid using other softwares. Sure, it is absolutely right. And I appreciate directly using matplotlib to create graphs much. The problem is, the default style of matplotlib is far from satisfactory. Lots of details need to be changed and below is an uncompleted list:</p>
+<ul>
+<li>The default font size are too small</li>
+<li>The default linewidth is too thin</li>
+<li>The default font family is somewhat ugly (depending on the system font, indeed)</li>
+<li>......</li>
+</ul>
+<h3 id="drawbacks-of-origin-lab-software">drawbacks of Origin Lab software</h3>
+<p>I have to admit that Origin Lab is a wonderful graph software and quite easy to use for newbies and experts. It is quick to create a simple graph by clicking some buttons, and all operations can be done visually without any coding.</p>
+<p>However, when creating some complex pictures, Origin's default settings are not good enough. For example, when creating multiple subplots (the term <code>subplot</code> is consistent with matplotlib's API), I usually choose the <code>merge</code> function to gather all the subplots into one graph. But aligning all the subplots would often be a mess even if the individual plots perform perfectly. It is somewhat confusing to make all subplots' sizes perfect. Below is an example. The biggest problem is the size doesn't fit and there are many other small issue.</p>
+<p><img src="https://i.loli.net/2020/07/08/RADiuQKF6Nb7Icp.png" alt="before merge" loading="lazy"><br>
+<img src="https://i.loli.net/2020/07/08/9jYAfd6NM23khym.png" alt="after merge" loading="lazy"></p>
+<h2 id="matplotlib-style">Matplotlib style</h2>
+<p>It is sure that most elements of both Origin Lab graphs and matplotlib graphs can be optimized. The problem might be that you should be very familiar with them. As far as I know, the customized format style of Origin Lab and matplotlib can be saved for further use. But it seems not easy for Origin Lab to remember the alignment settings for multiple subplots, which exhausted my patience.</p>
+<blockquote>
+<p>天下苦Origin久矣。</p>
+</blockquote>
+<p>So, when I found the project <em><a href="https://github.com/garrettj403/SciencePlots">SciencePlots</a></em>, I feel like boarding Noah's Ark. This project contains several matplotlib style files which can be simply used by <code>plt.style.use('scicence')</code>.</p>
+<p>This project opens my mind and soon I modified the style file in order to meet my requirements. The usage of the style files is like <code>ggtheme</code> in <code>ggplot2</code>, which, I accidentally meet some years ago.</p>
+<h3 id="style-configuration">Style configuration</h3>
+<p>Here I simply put my configuration file for some explaination.</p>
+<pre><code class="language-yaml"># It is a modified version of garrettj403/SciencePlots/science.mplstyle
+# (https://github.com/garrettj403/SciencePlots/blob/master/styles/science.mplstyle)
+
+# Set color cycle: using vibrant palette, color-blind safe
+axes.prop_cycle : cycler('color', ['0077BB', '33BBEE', '009988', 'EE7733', 'CC3311', 'EE3377', 'BBBBBB'])
+
+# Set default figure size
+figure.figsize : 8, 6
+
+# Set font size
+# Large font size helps clear vision when the graph is zoomed out
+legend.fontsize: 24
+axes.labelsize: 28
+axes.titlesize: 28
+xtick.labelsize: 28
+ytick.labelsize: 28
+axes.titlepad: 10
+
+# Set x axis
+# large ticks are also needed
+xtick.direction : in
+xtick.major.size : 6
+xtick.major.width : 1.5
+xtick.minor.size : 4
+xtick.minor.width : 1
+xtick.minor.visible : True
+xtick.top : True
+
+# Set y axis
+ytick.direction : in
+ytick.major.size : 6
+ytick.major.width : 1.5
+ytick.minor.size : 4
+ytick.minor.width : 1
+ytick.minor.visible : True
+ytick.right : True
+
+# Set line widths
+# think linewidth and big scatter points are also needed
+axes.linewidth : 2
+grid.linewidth : 1
+lines.linewidth : 3
+lines.markersize : 10
+axes.grid : False
+
+# Remove legend frame
+legend.frameon : False
+
+# Always save as 'tight'
+savefig.bbox : tight
+savefig.pad_inches : 0.05
+
+# Use sans-serif fonts
+# Times New Roman or Arial are for serif and sans, respectively
+# If CJK characters are necessary, change font-family to Microsoft Yahei
+font.sans-serif : Arial
+font.family : sans-serif
+mathtext.fontset : dejavuserif
+</code></pre>
+<h3 id="demo-graphs">demo graphs</h3>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/07/08/CacPTZXWjh9oD7O.png" alt="demo.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://i.loli.net/2020/07/08/o63dB8jzwr9NPiI.png" alt="demo2.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://i.loli.net/2020/07/08/ijdQDtaOMZWNKEY.png" alt="demo3.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://i.loli.net/2020/07/08/wkTAxGPVQI1v5m9.png" alt="demo5.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="5"><img src="https://i.loli.net/2020/07/08/Vv7UwaT5cnN9CHi.png" alt="demo4.png" loading="lazy"></figure>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://hxhc.github.io/post/kennardstone-spxy/">
+              <h3 class="post-title">
+                下一篇：Kennard-Stone algorithm and SPXY algorithm with python implementation
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">Great ideas in mind, poor words on paper</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://hxhc.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '2746a577092c892a1bcf',
+        clientSecret: 'f4c7791f4ecd0cc82dbc7c92be83dcc5bc4f9666',
+        repo: 'hxhc.github.io',
+        owner: 'hxhc',
+        admin: ['hxhc'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
