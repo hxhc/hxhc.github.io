@@ -2,14 +2,14 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hxhc.github.io</id>
     <title>HXHC Blog</title>
-    <updated>2020-09-17T13:25:34.902Z</updated>
+    <updated>2021-01-06T06:14:32.097Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hxhc.github.io"/>
     <link rel="self" href="https://hxhc.github.io/atom.xml"/>
     <subtitle>Great ideas in mind, poor words on paper</subtitle>
     <logo>https://hxhc.github.io/images/avatar.png</logo>
     <icon>https://hxhc.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, HXHC Blog</rights>
+    <rights>All rights reserved 2021, HXHC Blog</rights>
     <entry>
         <title type="html"><![CDATA[Using matplotlib to create publishable pictures]]></title>
         <id>https://hxhc.github.io/post/matplotlib-style/</id>
