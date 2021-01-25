@@ -5,13 +5,13 @@
     
 <meta charset="utf-8" >
 
-<title>Using matplotlib to create publishable pictures | HXHC Blog</title>
+<title>Using matplotlib to create publishable graphs | HXHC Blog</title>
 <meta name="description" content="Great ideas in mind, poor words on paper">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
-<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1611559652721">
+<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1611559912027">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://hxhc.github.io/styles/main.css">
 
@@ -35,7 +35,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://hxhc.github.io">
-        <img class="avatar" src="https://hxhc.github.io/images/avatar.png?v=1611559652721" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://hxhc.github.io/images/avatar.png?v=1611559912027" alt="" width="32px" height="32px">
       </a>
       <a href="https://hxhc.github.io">
         <h1 class="site-title">HXHC Blog</h1>
@@ -88,7 +88,7 @@
             <div class="feature-container" style="background-image: url('https://i.loli.net/2020/07/08/o63dB8jzwr9NPiI.png')">
             </div>
           
-          <h2 class="post-title">Using matplotlib to create publishable pictures</h2>
+          <h2 class="post-title">Using matplotlib to create publishable graphs</h2>
           <div class="post-info post-detail-info">
             <span><i class="icon-calendar-outline"></i> 2020-07-08</span>
             
@@ -104,7 +104,7 @@
             
           </div>
           <div class="post-content">
-            <p>Working or sleeping, I dream of pictures - usually of rather fancy pictures on academic journals. When I think how brilliant pictures impact my feelings, I wonder about the code behind, for I am extremely tired of, and frightened by making plots by hand in <a href="https://www.originlab.com/">Origin Lab</a> or some other software.</p>
+            <p>Working or sleeping, I dream of graphs - usually of rather fancy graphs on academic journals. When I think how brilliant graphs impact my feelings, I wonder about the code behind, for I am extremely tired of, and frightened by making plots by hand in <a href="https://www.originlab.com/">Origin Lab</a> or some other software.</p>
 <!-- more -->
 <p><ul class="markdownIt-TOC">
 <li>
@@ -126,9 +126,9 @@
 </ul>
 </p>
 <h2 id="current-status">Current status</h2>
-<p>Usually my workflow of creating academic picture is:</p>
+<p>Usually my workflow of creating academic graph is:</p>
 <ol>
-<li>Doing data analysis using python</li>
+<li>Doing data analysis using python or some others</li>
 <li>Exporting result data to Excel files or CSV files</li>
 <li>Copying result data into Origin Lab and making some graphs</li>
 <li>Adjusting graph details endlessly</li>
@@ -143,7 +143,7 @@
 </ul>
 <h3 id="drawbacks-of-origin-lab-software">drawbacks of Origin Lab software</h3>
 <p>I have to admit that Origin Lab is a wonderful graph software and quite easy to use for newbies and experts. It is quick to create a simple graph by clicking some buttons, and all operations can be done visually without any coding.</p>
-<p>However, when creating some complex pictures, Origin's default settings are not good enough. For example, when creating multiple subplots (the term <code>subplot</code> is consistent with matplotlib's API), I usually choose the <code>merge</code> function to gather all the subplots into one graph. But aligning all the subplots would often be a mess even if the individual plots perform perfectly. It is somewhat confusing to make all subplots' sizes perfect. Below is an example. The biggest problem is the size doesn't fit and there are many other small issue.</p>
+<p>However, when creating some complex graphs, Origin's default settings are not good enough. For example, when creating multiple subplots (the term <code>subplot</code> is consistent with matplotlib's API), I usually choose the <code>merge</code> function to gather all the subplots into one graph. But aligning all the subplots would often be a mess even if the individual plots perform perfectly. It is somewhat confusing to make all subplots' sizes perfect. Below is an example. The biggest problem is the size doesn't fit and there are many other small issue.</p>
 <p><img src="https://i.loli.net/2020/07/08/RADiuQKF6Nb7Icp.png" alt="before merge" loading="lazy"><br>
 <img src="https://i.loli.net/2020/07/08/9jYAfd6NM23khym.png" alt="after merge" loading="lazy"></p>
 <h2 id="matplotlib-style">Matplotlib style</h2>
