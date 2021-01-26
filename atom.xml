@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hxhc.github.io</id>
     <title>HXHC Blog</title>
-    <updated>2021-01-25T07:36:43.105Z</updated>
+    <updated>2021-01-26T05:03:58.070Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hxhc.github.io"/>
     <link rel="self" href="https://hxhc.github.io/atom.xml"/>
@@ -10,6 +10,17 @@
     <logo>https://hxhc.github.io/images/avatar.png</logo>
     <icon>https://hxhc.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, HXHC Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[如何搭建github pages以及提高访问速度]]></title>
+        <id>https://hxhc.github.io/post/how-to-setup-github-pages/</id>
+        <link href="https://hxhc.github.io/post/how-to-setup-github-pages/">
+        </link>
+        <updated>2021-01-26T04:10:59.000Z</updated>
+        <summary type="html"><![CDATA[<p>这个博客已经荒废了很久。由于定位上是一个偏向技术型的博客，记录学习中遇到的一些问题，所以我一般不会把学术研究内容或浅显的问题写在博客里。此外由于不想花钱和时间搭服务器，也不想花时间学习更多的建站知识，所以选择了github pages这一平台。本文就如何搭建github pages以及提高大陆地区的访问速度做一个简单介绍。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>这个博客已经荒废了很久。由于定位上是一个偏向技术型的博客，记录学习中遇到的一些问题，所以我一般不会把学术研究内容或浅显的问题写在博客里。此外由于不想花钱和时间搭服务器，也不想花时间学习更多的建站知识，所以选择了github pages这一平台。本文就如何搭建github pages以及提高大陆地区的访问速度做一个简单介绍。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Using matplotlib to create publishable graphs]]></title>
         <id>https://hxhc.github.io/post/matplotlib-style/</id>
