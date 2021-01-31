@@ -1,11 +1,10 @@
-
-<!DOCTYPE html>
 <html>
-  <head>
-    
+
+<head>
+  
 <meta charset="utf-8" >
 
-<title>Muse | HXHC Blog</title>
+<title>HXHC Blog</title>
 <meta name="description" content="Great ideas in mind, poor words on paper">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -17,15 +16,23 @@
 <link rel="stylesheet" href="https://hxhc.github.io/styles/main.css">
 
 
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.0/gitalk.css" />
+  
+
+
+  
+
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
-  </head>
-  <body>
-    <div id="app" class="main">
-      <div class="site-header-container">
+</head>
+
+<body>
+  <div id="app" class="main">
+    <div class="site-header-container">
   <div class="site-header">
     <div class="left">
       <a href="https://hxhc.github.io">
@@ -91,52 +98,11 @@
 
       <div class="content-container">
 
-        <div class="current-tag-container">
-          <h2 class="title">
-            <i class="icon icon-pricetags-outline"></i> Muse
-          </h2> 
+        <div id="gridea-search-result" data-update="1612078037749">
+          <div class="searching">Searching......</div>
+          <div class="no-result" style="display:none">No Results Found</div>
+
         </div>
-
-        
-<section class="post-item">
-    <div class="content">
-      <a href="https://hxhc.github.io/post/CljWvWcib/">
-        <h2 class="post-title">美利坚游记——ORLANDO</h2>
-      </a>
-      <div class="post-abstract">
-        <p>如果一定要为这篇文章命个名，我想一定不会是《美利坚游记》，如此浮夸，如此直白，如此泛泛，完全不是我的行文风格。</p>
-<p>可是当我想为它取题时，脑中第一浮现出的，是《欧陆游记》这个名字。啊，“欧陆”，充满诗意，饱含浪漫；可惜我现在游的是美国，总不能叫美陆，东施效颦一效，不如称之为“美利坚游记”。</p>
-
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2019-11-16</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://hxhc.github.io/tag/muse/">
-                Muse
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-      <a href="https://hxhc.github.io/post/CljWvWcib/">
-        <div class="feature-container" style="background-image: url('https://www.aiche.org/sites/default/files/styles/aiche_content_scaled/public/images/conference/logo/2640_18_2019_annual_logo_ol.png?itok=96ctAOEj')">
-        </div>
-      </a>
-    
-  </section>
-
-
-<div class="pagination-container">
-  
-  
-</div>
-
 
       </div>
 
@@ -163,11 +129,12 @@
 </div>
 
 
-    </div>
-    <script src="https://hxhc.github.io/media/scripts/index.js"></script>
+  </div>
+  <script src="https://hxhc.github.io/media/scripts/index.js"></script>
+  <script src="https://hxhc.github.io/media/gridea-search/result-template.ejs" type="text/ejs"></script>
+  <script src="https://hxhc.github.io/media/gridea-search/fuse.basic.min.js"></script>
+  <script src="https://hxhc.github.io/media/gridea-search/ejs.min.js"></script>
+  <script src="https://hxhc.github.io/media/gridea-search/gridea-search.js"></script>
+</body>
 
-
-
-
-  </body>
 </html>

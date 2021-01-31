@@ -11,22 +11,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
-<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1611982394165">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.css" integrity="sha512-+ubdCwaPd23Rs7VSlGjW9c+WFjPvbBbHciVOOXv8g2x0PhuB28W15EKn9xKodoNbFOYMiCf44RrW10/GGXp/SQ==" crossorigin="anonymous" />
+<link rel="shortcut icon" href="https://hxhc.github.io/favicon.ico?v=1612078037749">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://hxhc.github.io/styles/main.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
 
 
   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.0/gitalk.css" />
   
 
+
   
 
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
 
 
   </head>
@@ -36,15 +36,24 @@
   <div class="site-header">
     <div class="left">
       <a href="https://hxhc.github.io">
-        <img class="avatar" src="https://hxhc.github.io/images/avatar.png?v=1611982394165" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://hxhc.github.io/images/avatar.png?v=1612078037749" alt=""
+          width="32px" height="32px">
       </a>
       <a href="https://hxhc.github.io">
-        <h1 class="site-title">HXHC Blog</h1>
+        <h1 class="site-title">
+          HXHC Blog
+        </h1>
       </a>
     </div>
     <div class="right">
+      <div class="gridea-search-div" v-if="headSearchShow">
+        <form id="gridea-search-form" action="https://hxhc.github.io/search/">
+          <input class="gridea-search-input" autocomplete="off" spellcheck="false" name="q" />
+        </form>
+      </div>
       <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }"
+          @click="menuClick()"></i>
       </transition>
     </div>
   </div>
@@ -53,35 +62,39 @@
 <transition name="fade">
   <div class="menu-container" style="display: none;" v-show="menuVisible">
     <div class="menu-list">
+      <div class="gridea-search-div" v-if="menuSearchShow">
+        <form id="gridea-search-form" action="https://hxhc.github.io/search/">
+          <input class="gridea-search-input" autocomplete="off" spellcheck="false" name="q" />
+        </form>
+      </div>
       
         
-          <a href="/" class="menu purple-link">
-            Home
-          </a>
+            <a href="/" class="menu purple-link">
+              Home
+            </a>
+            
+              
         
-      
+            <a href="/archives" class="menu purple-link">
+              Archives
+            </a>
+            
+              
         
-          <a href="/archives" class="menu purple-link">
-            Archives
-          </a>
+            <a href="/tags" class="menu purple-link">
+              Tags
+            </a>
+            
+              
         
-      
-        
-          <a href="/tags" class="menu purple-link">
-            Tags
-          </a>
-        
-      
-        
-          <a href="/post/about" class="menu purple-link">
-            About
-          </a>
-        
-      
+            <a href="/post/about" class="menu purple-link">
+              About
+            </a>
+            
+              
     </div>
   </div>
 </transition>
-
 
       <div class="content-container">
         <div class="post-detail">
@@ -232,7 +245,7 @@ mathtext.fontset : dejavuserif
           <div class="next-post">
             <a class="purple-link" href="https://hxhc.github.io/post/kennardstone-spxy/">
               <h3 class="post-title">
-                Next：Kennard-Stone algorithm and SPXY algorithm with python implementation
+                下一篇：Kennard-Stone algorithm and SPXY algorithm with python implementation
               </h3>
             </a>
           </div>
@@ -271,18 +284,7 @@ mathtext.fontset : dejavuserif
 
 
     </div>
-    <script type="application/javascript">
-
-hljs.initHighlightingOnLoad()
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
-
-</script>
+    <script src="https://hxhc.github.io/media/scripts/index.js"></script>
 
 
 
