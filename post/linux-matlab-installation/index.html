@@ -1,0 +1,369 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Linux服务器安装Matlab2017_多镜像文件版本 | 环形缓冲</title>
+<meta name="description" content="HXHC Blog" />
+<link rel="shortcut icon" href="https://hxhc.xyz/favicon.ico?v=1715403560277">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.0/animate.min.css" integrity="sha256-HtCCUh9Hkh//8U1OwcbD8epVEUdBvuI8wj1KtqMhNkI=" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@8.11.0/dist/mermaid.min.js" integrity="sha256-sVAx+v/Q7v0Q2xm5vN7h5ccSna6gaLREhG9sF8pKT6I=" crossorigin="anonymous"></script> -->
+
+<!-- <link href="
+https://cdn.jsdelivr.net/npm/@openfonts/noto-serif-sc_chinese-simplified@1.44.2/index.min.css
+" rel="stylesheet"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/remixicon/4.2.0/remixicon.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css">
+<script src="https://cdn.bootcdn.net/ajax/libs/mermaid/9.1.1/mermaid.min.js"></script>
+
+
+<link rel="stylesheet" href="https://hxhc.xyz/styles/main.css">
+
+
+
+
+
+  </head>
+
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://hxhc.xyz">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://hxhc.xyz/images/avatar.png?v=1715403560277" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">环形缓冲</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            Table of Contents
+          </p>
+          <div class="toc-container hidden lg:block">
+            
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          Home
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          Archives
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          Tags
+        </a>
+      
+    
+      
+        <a href="https://notes.hxhc.xyz" class="menu" style="animation-delay: 0.6000000000000001s" target="_blank">
+          Notes
+        </a>
+      
+    
+      
+        <a href="https://photos.hxhc.xyz" class="menu" style="animation-delay: 0.8s" target="_blank">
+          Photo
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 1s">
+          About
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Great ideas in mind<br>
+Poor words on paper</div>
+    <a class="rss" href="https://hxhc.xyz/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()" style="backdrop-filter: blur(7px); background: hsla(0, 0%, 100%, 0.5); -webkit-backdrop-filter: blur(7px);">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">Linux服务器安装Matlab2017_多镜像文件版本</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2018-01-24 / 4 min read
+        </div>
+        
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://s2.loli.net/2024/04/08/WhM8nRPCJXf5qB3.png" alt="">
+        
+        <div class="post-content yue">
+          <p>实验室服务器为Ubuntu 14.04.5系统，性能自然不用说，Matlab却只有2013b和2012a的版本，让本地使用2016a的同志们感到不舒服，因为有些函数还是有很大修改的（比如matlabpool）。在实验室同志的强烈要求下，给服务器装了Matlab2017a版本（2016a的版本没找到破解版~）。</p>
+<!--more-->
+<p>其实网上已经有很多服务器安装matlab的<a href="https://zhyack.github.io/posts/2016_03_07-Install-Matlab-On-Ubuntu-Server.html">教程</a>了,不过多少有点差别，以下稍微记录一下安装记录：</p>
+<ol>
+<li><a href="http://www.xdowns.com/soft/184/Linux/2017/Soft_195115.html">下载</a>，解压，得到两个iso镜像文件和一个Crack文件夹：</li>
+</ol>
+<pre><code>.
+|-- R2017a_glnxa64_dvd1.iso
+|-- R2017a_glnxa64_dvd2.iso
+|-- Crack
+    |-- Readme.txt
+    |-- license_server.lic
+    |-- license_standalone.lic
+    |-- MATLAB_Production_Server
+        |-- R2017a
+            |-- bin
+                |-- glnxa64
+                    |-- libmwservices.so
+    |-- R2017a
+        |-- bin
+            |-- glnxa64
+                |-- libmwservices.so
+</code></pre>
+<ol start="2">
+<li>由于服务器已经配置好了Java环境，我也没有配置经验，如果Java环境有问题，还是看别人的教程吧~</li>
+<li>创建目录</li>
+</ol>
+<pre><code class="language-bash">$ sudo mkdir -p /usr/local/matlab2017a/2017a  # 安装目录
+$ sudo mkdir -p /usr/local/matlab2017a/etc  # 配置文件目录
+</code></pre>
+<ol start="4">
+<li>挂载镜像。挂载需要提权，所以还是得sudo</li>
+</ol>
+<pre><code class="language-bash">$ cd ~/matlab2017a  # 更改为镜像文件所在的目录，当然首先得把文件传到服务器上
+$ mkdir iso  # 创建挂载目录
+$ sudo mount R2017a_glnxa64_dvd1.iso iso/  # 挂载,发现镜像里竟然包含了crack文件夹，不管他了
+</code></pre>
+<ol start="5">
+<li>挂载后的目录里有<code>install</code>文件，直接安装肯定不行，因为没有图形界面，我们要采取silent的安装方式</li>
+</ol>
+<pre><code class="language-bash">$ cd iso
+$ sudo cp installer_input.txt /usr/local/matlab2017a/etc/  # 复制
+$ sudo cp activate.ini /usr/local/matlab2017a/etc/  # 复制
+$ sudo cp -r Crack /usr/local/matlab2017a/etc/  # 复制破解文件夹
+$ cd /usr/local/matlab2017a/etc
+$ sudo chomd +w installer_input.txt  # 增加写的权限
+$ sudo chmod +w activate.ini3  # 增加写的权限
+</code></pre>
+<ol start="6">
+<li>修改复制后的<code>installer_input.txt</code>文件</li>
+</ol>
+<pre><code class="language-txt">destinationFolder=/usr/local/matlab2017a/2017a  # 安装目录
+fileInstallationKey=09806-07443-53955-64350-21751-41297  # 序列号
+agreeToLicense=yes  # 同意协议
+outputFile=/tmp/mathworks_install.log  # 安装日志
+mode=silent  # 开启无人值守安装
+activationPropertiesFile=/usr/local/matlab2017a/etc/activate.ini # 激活文件
+licensePath= /usr/local/matlab2017a/etc/Crack/license_standalone.lic  # license文件
+</code></pre>
+<ol start="7">
+<li>修改复制后的<code>activate.ini</code>文件</li>
+</ol>
+<pre><code>isSilent=true  # 开启silent模式
+activateCommand=activateOffline  # 设置激活方式, 离线激活 无需联网
+licenseFile=/usr/local/matlab2017a/etc/Crack/license_standalone.lic  # license文件位置
+</code></pre>
+<ol start="8">
+<li>安装</li>
+</ol>
+<pre><code class="language-bash">$ cd ~/matlab2017a  # 回到原目录下，注意，该目录下挂载了iso,安装时不能在iso目录下安装
+$ screen -S matlab  # 创建一个screen，避免断网等不愉快的事带来的烦恼
+$ sudo iso/install -inputFile /usr/local/matlab2017a/etc/installer_input.txt
+$ (退出screen， Ctrl+A，D)  # 安装到差不多时会停止，提醒插入光盘2，先退出screen为好
+$ sudo mount R2017a_glnxa64_dvd2.iso iso/  # 挂载光盘2
+$ screen -r matlab  # 此时恢复screen，可以发现自动安装了
+</code></pre>
+<ol start="9">
+<li>破解，其实就是把Crack文件夹里的<code>libmwservice.so</code>文件覆盖原文件</li>
+</ol>
+<pre><code class="language-bash">$ sudo mv /usr/local/matlab2017a/2017a/bin/glnxa64/libmwservices.so \
+&gt; /usr/local/matlab/2017a/bin/glnxa64/libmwservices.so.bak  备份一下
+$ sudo cp /usr/local/matlab2017/etc/Crack/R2017a/bin/glnxa64/libmwservice.so \
+&gt; /usr/local/matlab2017a/2017a/bin/glnxa64/  # 目录太长了~
+$ sudo /usr/local/matlab2017a/2017a/bin/activate_matlab.sh -propertiesFile /usr/local/matlab2017a/etc/activate.ini
+</code></pre>
+<ol start="10">
+<li>基本上大功告成，添加一个alias以后用起来方便点,在<code>~/.bashrc</code>文件最后加入一句,然后<code>source ~/.bashrc</code>即可</li>
+</ol>
+<pre><code>alias matlab2017=&quot;/usr/local/matlab2017a/2017a/bin/matlab&quot;
+
+</code></pre>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://hxhc.xyz/tag/Software/">
+            <span class="flex-auto">Software</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://hxhc.xyz/post/openwrt-wireless-relay/">
+                <h3 class="post-title">
+                  <i class="ri-arrow-left-line"></i>
+                   Openwrt下实现无线中继
+                </h3>
+              </a>
+            </div>
+          
+
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.css">
+<script src="https://cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'e8a467fa1547ec3d230a',
+    clientSecret: '2a68cbc2236f231486004a9264438759e29d40f1',
+    repo: 'hxhc.github.io',
+    owner: 'hxhc',
+    admin: ['hxhc'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+      </div>
+    </div>
+
+
+    <link rel="stylesheet" href="https://hxhc-blog.oss-cn-hangzhou.aliyuncs.com/media/prism-default-2.css">
+    <script src="https://hxhc-blog.oss-cn-hangzhou.aliyuncs.com/media/prism-2.js"></script>
+
+    <script>
+
+    Prism.highlightAll()
+    let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+    // This should probably be throttled.
+    // Especially because it triggers during smooth scrolling.
+    // https://lodash.com/docs/4.17.10#throttle
+    // You could do like...
+    // window.addEventListener("scroll", () => {
+    //    _.throttle(doThatStuff, 100);
+    // });
+    // Only not doing it here to keep this Pen dependency-free.
+
+    window.addEventListener("scroll", event => {
+      let fromTop = window.scrollY;
+
+      mainNavLinks.forEach((link, index) => {
+        let section = document.getElementById(decodeURI(link.hash).substring(1));
+        let nextSection = null
+        if (mainNavLinks[index + 1]) {
+          nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+        }
+        if (section.offsetTop <= fromTop) {
+          if (nextSection) {
+            if (nextSection.offsetTop > fromTop) {
+              link.classList.add("current");
+            } else {
+              link.classList.remove("current");
+            }
+          } else {
+            link.classList.add("current");
+          }
+        } else {
+          link.classList.remove("current");
+        }
+      });
+    });
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+      var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+      if ("IntersectionObserver" in window) {
+        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              let lazyImage = entry.target
+              lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+              lazyImage.classList.remove("lazy")
+              lazyImageObserver.unobserve(lazyImage)
+            }
+          });
+        });
+
+        lazyImages.forEach(function(lazyImage) {
+          lazyImageObserver.observe(lazyImage)
+        })
+      } else {
+        // Possibly fall back to a more compatible method here
+      }
+    });
+
+    const menuContainer = document.querySelector('.menu-container')
+    const menus = document.querySelectorAll('.menu-container .menu')
+    const mask = document.querySelector('.mask')
+    const contentWrapper = document.querySelector('.content-wrapper')
+    const latestArticle = document.querySelector('.latest-article')
+    const readMore = document.querySelector('.read-more')
+    const indexPage = document.querySelector('.index-page')
+
+    const isHome = location.pathname === '/'
+    if (latestArticle) {
+      latestArticle.style.display = isHome ? 'block' : 'none'
+      readMore.style.display = isHome ? 'block' : 'none'
+      indexPage.style.display = isHome ? 'none' : 'block'
+    }
+
+    const openMenu = () => {
+      menuContainer.classList.add('open')
+      menus.forEach(menu => {
+        menu.classList.add('animated', 'fadeInLeft')
+      })
+      mask.classList.add('open')
+      contentWrapper.classList.add('is-second')
+    }
+
+    const closeMenu = () => {
+      menuContainer.classList.remove('open')
+      menus.forEach(menu => {
+        menu.classList.remove('animated', 'fadeInLeft')
+      })
+      mask.classList.remove('open')
+      contentWrapper.classList.remove('is-second')
+    }
+
+    </script>
+
+    <script src="//instant.page/5.1.1" type="module" integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+
+
+
+
+  </body>
+</html>

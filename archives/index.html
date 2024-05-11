@@ -1,0 +1,575 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>环形缓冲</title>
+<meta name="description" content="HXHC Blog" />
+<link rel="shortcut icon" href="https://hxhc.xyz/favicon.ico?v=1715403560277">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.0/animate.min.css" integrity="sha256-HtCCUh9Hkh//8U1OwcbD8epVEUdBvuI8wj1KtqMhNkI=" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@8.11.0/dist/mermaid.min.js" integrity="sha256-sVAx+v/Q7v0Q2xm5vN7h5ccSna6gaLREhG9sF8pKT6I=" crossorigin="anonymous"></script> -->
+
+<!-- <link href="
+https://cdn.jsdelivr.net/npm/@openfonts/noto-serif-sc_chinese-simplified@1.44.2/index.min.css
+" rel="stylesheet"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/remixicon/4.2.0/remixicon.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css">
+<script src="https://cdn.bootcdn.net/ajax/libs/mermaid/9.1.1/mermaid.min.js"></script>
+
+
+<link rel="stylesheet" href="https://hxhc.xyz/styles/main.css">
+
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://hxhc.xyz">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://hxhc.xyz/images/avatar.png?v=1715403560277" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">环形缓冲</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            HXHC Blog
+          </p>
+          <div class="animated fadeInLeft social-container hidden lg:block" style="animation-delay: 0.6s">
+            
+              
+                <a href="https://github.com/hxhc" target="_blank" class="mr-4 text-xl text-gray-400 font-light hover:text-gray-900">
+                  <i class="ri-github-line"></i>
+                </a>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          Home
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          Archives
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          Tags
+        </a>
+      
+    
+      
+        <a href="https://notes.hxhc.xyz" class="menu" style="animation-delay: 0.6000000000000001s" target="_blank">
+          Notes
+        </a>
+      
+    
+      
+        <a href="https://photos.hxhc.xyz" class="menu" style="animation-delay: 0.8s" target="_blank">
+          Photo
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 1s">
+          About
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Great ideas in mind<br>
+Poor words on paper</div>
+    <a class="rss" href="https://hxhc.xyz/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()" style="backdrop-filter: blur(7px); background: hsla(0, 0%, 100%, 0.5); -webkit-backdrop-filter: blur(7px);">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4">
+        <h2 class="text-lg text-gray-700 mb-8">
+          <i class="ri-archive-line"></i> Archive
+        </h2>
+        
+
+        <div class="archives-container">
+          
+            <h2 class="text-gray-600 py-4 animated fadeIn">
+              <i class="ri-map-pin-time-line"></i>
+              2024
+            </h2>
+            
+              
+                <a href="https://hxhc.xyz/post/solving-the-problem-of-clangd-not-finding-system-header-of-msvc/" class="post">
+                  <h2 class="inline-block font-bold text-lg post-title animated fadeIn">
+                    Solving the problem of clangd not finding system headers of MSVC
+                  </h2>
+                </a>
+                <div class="text-sm font-light mt-3 mb-6 text-gray-400 animated fadeInDown" style="animation-delay: 0.4s">2024-04-24</div>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          
+            <h2 class="text-gray-600 py-4 animated fadeIn">
+              <i class="ri-map-pin-time-line"></i>
+              2022
+            </h2>
+            
+              
+            
+              
+                <a href="https://hxhc.xyz/post/CUtests/" class="post">
+                  <h2 class="inline-block font-bold text-lg post-title animated fadeIn">
+                     Content Uniformity Tests Implementation Based on Monte-Carlo simulation in C++ and Python 
+                  </h2>
+                </a>
+                <div class="text-sm font-light mt-3 mb-6 text-gray-400 animated fadeInDown" style="animation-delay: 0.4s">2022-05-16</div>
+              
+            
+              
+                <a href="https://hxhc.xyz/post/openblas-vs-intel-mkl-for-numpy/" class="post">
+                  <h2 class="inline-block font-bold text-lg post-title animated fadeIn">
+                    Openblas vs Intel MKL for Numpy and AMD CPUs
+                  </h2>
+                </a>
+                <div class="text-sm font-light mt-3 mb-6 text-gray-400 animated fadeInDown" style="animation-delay: 0.4s">2022-02-25</div>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          
+            <h2 class="text-gray-600 py-4 animated fadeIn">
+              <i class="ri-map-pin-time-line"></i>
+              2021
+            </h2>
+            
+              
+            
+              
+            
+              
+            
+              
+                <a href="https://hxhc.xyz/post/l2-regularization-vs-weight-decay/" class="post">
+                  <h2 class="inline-block font-bold text-lg post-title animated fadeIn">
+                    L2 regularization vs Weight decay
+                  </h2>
+                </a>
+                <div class="text-sm font-light mt-3 mb-6 text-gray-400 animated fadeInDown" style="animation-delay: 0.4s">2021-09-14</div>
+              
+            
+              
+                <a href="https://hxhc.xyz/post/from-keras-to-pytorch/" class="post">
+                  <h2 class="inline-block font-bold text-lg post-title animated fadeIn">
+                    From Keras to PyTorch
+                  </h2>
+                </a>
+                <div class="text-sm font-light mt-3 mb-6 text-gray-400 animated fadeInDown" style="animation-delay: 0.4s">2021-08-22</div>
+              
+            
+              
+                <a href="https://hxhc.xyz/post/SG_filter/" class="post">
+                  <h2 class="inline-block font-bold text-lg post-title animated fadeIn">
+                    Savitzky–Golay filter python implementation
+                  </h2>
+                </a>
+                <div class="text-sm font-light mt-3 mb-6 text-gray-400 animated fadeInDown" style="animation-delay: 0.4s">2021-07-19</div>
+              
+            
+              
+                <a href="https://hxhc.xyz/post/SSPP/" class="post">
+                  <h2 class="inline-block font-bold text-lg post-title animated fadeIn">
+                    Step-wise sequential phase partition  algorithm based statistical modeling and online process monitoring
+                  </h2>
+                </a>
+                <div class="text-sm font-light mt-3 mb-6 text-gray-400 animated fadeInDown" style="animation-delay: 0.4s">2021-07-19</div>
+              
+            
+              
+                <a href="https://hxhc.xyz/post/mermaid-test/" class="post">
+                  <h2 class="inline-block font-bold text-lg post-title animated fadeIn">
+                    Mermaid support test
+                  </h2>
+                </a>
+                <div class="text-sm font-light mt-3 mb-6 text-gray-400 animated fadeInDown" style="animation-delay: 0.4s">2021-07-14</div>
+              
+            
+              
+                <a href="https://hxhc.xyz/post/how-to-setup-github-pages/" class="post">
+                  <h2 class="inline-block font-bold text-lg post-title animated fadeIn">
+                    如何搭建github pages以及提高访问速度
+                  </h2>
+                </a>
+                <div class="text-sm font-light mt-3 mb-6 text-gray-400 animated fadeInDown" style="animation-delay: 0.4s">2021-01-26</div>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          
+            <h2 class="text-gray-600 py-4 animated fadeIn">
+              <i class="ri-map-pin-time-line"></i>
+              2020
+            </h2>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <a href="https://hxhc.xyz/post/matplotlib-style/" class="post">
+                  <h2 class="inline-block font-bold text-lg post-title animated fadeIn">
+                    Using matplotlib to create publishable graphs
+                  </h2>
+                </a>
+                <div class="text-sm font-light mt-3 mb-6 text-gray-400 animated fadeInDown" style="animation-delay: 0.4s">2020-07-08</div>
+              
+            
+              
+                <a href="https://hxhc.xyz/post/kennardstone-spxy/" class="post">
+                  <h2 class="inline-block font-bold text-lg post-title animated fadeIn">
+                    Kennard-Stone algorithm and SPXY algorithm with python implementation
+                  </h2>
+                </a>
+                <div class="text-sm font-light mt-3 mb-6 text-gray-400 animated fadeInDown" style="animation-delay: 0.4s">2020-02-27</div>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          
+            <h2 class="text-gray-600 py-4 animated fadeIn">
+              <i class="ri-map-pin-time-line"></i>
+              2019
+            </h2>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <a href="https://hxhc.xyz/post/windows-shared-folder/" class="post">
+                  <h2 class="inline-block font-bold text-lg post-title animated fadeIn">
+                    Windows下创建共享文件夹并映射网络驱动器
+                  </h2>
+                </a>
+                <div class="text-sm font-light mt-3 mb-6 text-gray-400 animated fadeInDown" style="animation-delay: 0.4s">2019-07-15</div>
+              
+            
+              
+                <a href="https://hxhc.xyz/post/frp-nat/" class="post">
+                  <h2 class="inline-block font-bold text-lg post-title animated fadeIn">
+                    Frp内网穿透及HTTP代理的实现
+                  </h2>
+                </a>
+                <div class="text-sm font-light mt-3 mb-6 text-gray-400 animated fadeInDown" style="animation-delay: 0.4s">2019-07-11</div>
+              
+            
+              
+                <a href="https://hxhc.xyz/post/openwrt-wireless-relay/" class="post">
+                  <h2 class="inline-block font-bold text-lg post-title animated fadeIn">
+                     Openwrt下实现无线中继
+                  </h2>
+                </a>
+                <div class="text-sm font-light mt-3 mb-6 text-gray-400 animated fadeInDown" style="animation-delay: 0.4s">2019-07-11</div>
+              
+            
+              
+            
+          
+            <h2 class="text-gray-600 py-4 animated fadeIn">
+              <i class="ri-map-pin-time-line"></i>
+              2018
+            </h2>
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <a href="https://hxhc.xyz/post/linux-matlab-installation/" class="post">
+                  <h2 class="inline-block font-bold text-lg post-title animated fadeIn">
+                    Linux服务器安装Matlab2017_多镜像文件版本
+                  </h2>
+                </a>
+                <div class="text-sm font-light mt-3 mb-6 text-gray-400 animated fadeInDown" style="animation-delay: 0.4s">2018-01-24</div>
+              
+            
+          
+        </div>
+
+        <div>
+          <div class="pagination-container animated fadeIn">
+  
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- <link href="https://cdn.bootcdn.net/ajax/libs/prism/1.28.0/themes/prism.css" rel="stylesheet"> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/prism/1.28.0/prism.min.js"></script> -->
+
+<link rel="stylesheet" href="https://hxhc-blog.oss-cn-hangzhou.aliyuncs.com/media/prism-default-2.css">
+<script src="https://hxhc-blog.oss-cn-hangzhou.aliyuncs.com/media/prism-2.js"></script>
+
+<script>
+
+Prism.highlightAll()
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+
+</script>
+
+<script src="//instant.page/5.1.1" type="module" integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+
+  </body>
+</html>

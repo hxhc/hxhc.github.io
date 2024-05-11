@@ -1,0 +1,463 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mermaid support test | 环形缓冲</title>
+<meta name="description" content="HXHC Blog" />
+<link rel="shortcut icon" href="https://hxhc.xyz/favicon.ico?v=1715403560277">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.0/animate.min.css" integrity="sha256-HtCCUh9Hkh//8U1OwcbD8epVEUdBvuI8wj1KtqMhNkI=" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@8.11.0/dist/mermaid.min.js" integrity="sha256-sVAx+v/Q7v0Q2xm5vN7h5ccSna6gaLREhG9sF8pKT6I=" crossorigin="anonymous"></script> -->
+
+<!-- <link href="
+https://cdn.jsdelivr.net/npm/@openfonts/noto-serif-sc_chinese-simplified@1.44.2/index.min.css
+" rel="stylesheet"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/remixicon/4.2.0/remixicon.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css">
+<script src="https://cdn.bootcdn.net/ajax/libs/mermaid/9.1.1/mermaid.min.js"></script>
+
+
+<link rel="stylesheet" href="https://hxhc.xyz/styles/main.css">
+
+
+
+
+
+  </head>
+
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://hxhc.xyz">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://hxhc.xyz/images/avatar.png?v=1715403560277" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">环形缓冲</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            Table of Contents
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li><a href="#add-mermaid-support-for-gridea">Add mermaid support for Gridea</a></li>
+<li><a href="#test">Test</a>
+<ul>
+<li><a href="#1-official-demo-test">1.  Official demo test</a></li>
+<li><a href="#2-chinese-language-test">2. Chinese language test</a>
+<ul>
+<li><a href="#%E7%A6%BB%E5%BF%83%E6%B5%93%E7%BC%A9%E6%9C%BA%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95">离心浓缩机的使用方法</a></li>
+</ul>
+</li>
+<li><a href="#3-sequence-diagram-test">3. Sequence Diagram test</a></li>
+</ul>
+</li>
+<li><a href="#insert-netease-link">Insert Netease link</a></li>
+<li><a href="#insert-bilibli-video-link">Insert Bilibli video link</a></li>
+<li><a href="#customized-colored-notes-support">Customized colored notes support</a></li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          Home
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          Archives
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          Tags
+        </a>
+      
+    
+      
+        <a href="https://notes.hxhc.xyz" class="menu" style="animation-delay: 0.6000000000000001s" target="_blank">
+          Notes
+        </a>
+      
+    
+      
+        <a href="https://photos.hxhc.xyz" class="menu" style="animation-delay: 0.8s" target="_blank">
+          Photo
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 1s">
+          About
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Great ideas in mind<br>
+Poor words on paper</div>
+    <a class="rss" href="https://hxhc.xyz/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()" style="backdrop-filter: blur(7px); background: hsla(0, 0%, 100%, 0.5); -webkit-backdrop-filter: blur(7px);">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">Mermaid support test</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2021-07-14 / 6 min read
+        </div>
+        
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://s2.loli.net/2022/03/10/nDoj4BrOTZSVNQ2.jpg" alt="">
+        
+        <div class="post-content yue">
+          <p>Test for mermaid and iframe</p>
+<p><code>2022-5-26</code> updated: Mermaid support has be removed because loading mermaid.min.js costs too much time. It will be re-eabled once needed.</p>
+<!-- more -->
+<p><ul class="markdownIt-TOC">
+<li><a href="#add-mermaid-support-for-gridea">Add mermaid support for Gridea</a></li>
+<li><a href="#test">Test</a>
+<ul>
+<li><a href="#1-official-demo-test">1.  Official demo test</a></li>
+<li><a href="#2-chinese-language-test">2. Chinese language test</a>
+<ul>
+<li><a href="#%E7%A6%BB%E5%BF%83%E6%B5%93%E7%BC%A9%E6%9C%BA%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95">离心浓缩机的使用方法</a></li>
+</ul>
+</li>
+<li><a href="#3-sequence-diagram-test">3. Sequence Diagram test</a></li>
+</ul>
+</li>
+<li><a href="#insert-netease-link">Insert Netease link</a></li>
+<li><a href="#insert-bilibli-video-link">Insert Bilibli video link</a></li>
+<li><a href="#customized-colored-notes-support">Customized colored notes support</a></li>
+</ul>
+</p>
+<h1 id="add-mermaid-support-for-gridea">Add mermaid support for Gridea</h1>
+<ol>
+<li>add the mermaid script in head.ejs file of the theme</li>
+</ol>
+<pre><code class="language-html">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/mermaid@8.11.0/dist/mermaid.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<ol start="2">
+<li>when writing articles, using the form below to render the mermaid div</li>
+</ol>
+<pre><code class="language-html">&lt;script&gt;mermaid.initialize({startOnLoad:true});&lt;/script&gt;
+&lt;div class=&quot;mermaid&quot;&gt;
+    xxxxx
+    xxxx
+&lt;/div&gt;
+</code></pre>
+<h1 id="test">Test</h1>
+<h2 id="1-official-demo-test">1.  Official demo test</h2>
+<pre><code class="language-html">&lt;script&gt;mermaid.initialize({startOnLoad:true});&lt;/script&gt;
+&lt;div align=&quot;center&quot; class=&quot;mermaid&quot;&gt;
+      graph TD
+      A[Client] --&gt; B[Load Balancer]
+      B --&gt; C[Server1]
+      B --&gt; D[Server2]
+&lt;/div&gt;
+</code></pre>
+<script>mermaid.initialize({startOnLoad:true});</script>
+<div  align="center" class="mermaid">
+      graph TD
+      A[Client] --> B[Load Balancer]
+      B --> C[Server1]
+      B --> D[Server2]
+</div>
+<h2 id="2-chinese-language-test">2. Chinese language test</h2>
+<h3 id="离心浓缩机的使用方法">离心浓缩机的使用方法</h3>
+<pre><code class="language-html">&lt;script&gt;mermaid.initialize({startOnLoad:true});&lt;/script&gt;
+&lt;div align=&quot;center&quot; class=&quot;mermaid&quot;&gt;
+graph TD
+id1(开始) --&gt; id2(打开冷阱，待温度降至-80度)
+id2--&gt; id3(配平样品,放入离心浓缩机中，确定盖子严丝合缝)
+id3--&gt; id8(设置温度和时间等)
+id8--&gt; id4(打开真空泵)
+id4--&gt; id7(打开离心浓缩机)
+id7--&gt; id5(若样本是醇水混合物，需加入100微升水)
+id5--&gt; id6(结束)
+&lt;/div&gt;
+</code></pre>
+<script>mermaid.initialize({startOnLoad:true});</script>
+<div  align="center" class="mermaid">
+graph TD
+id1(开始) --> id2(打开冷阱,待温度降至-80度)
+id2--> id3(配平样品,放入离心浓缩机中,确定盖子严丝合缝)
+id3--> id8(设置温度和时间等)
+id8--> id4(打开真空泵)
+id4--> id7(打开离心浓缩机)
+id7--> id5(若样本是醇水混合物,需加入100微升水)
+id5--> id6(结束)
+</div>
+<p>注意：</p>
+<ul>
+<li>样品量不要太多，1mL 已经很多</li>
+<li>一般4h的总时间，可以设置加热时间2h，工作时间2h</li>
+<li>水的话，温度可以设为60度；有机溶剂一般不超过40度</li>
+<li>热敏性物质注意温度</li>
+<li>醇水混合物，最好最后再加100微升将残留有机溶剂带走，加水后需要稍稍混匀</li>
+</ul>
+<p>操作要点：</p>
+<ol>
+<li>冷阱温度一开始下降较慢，但过一会儿就会很快下降</li>
+<li>设置好离心浓缩的温度、heat time 和 run time 后，打开真空泵，并按下 auto run。只有按下 auto run 才会抽真空</li>
+<li>离心浓缩途中可以停止</li>
+</ol>
+<h2 id="3-sequence-diagram-test">3. Sequence Diagram test</h2>
+<pre><code class="language-html">&lt;script&gt;mermaid.initialize({startOnLoad:true});&lt;/script&gt;
+&lt;div align=&quot;center&quot; class=&quot;mermaid&quot;&gt;
+sequenceDiagram
+    participant z as 张三
+    participant l as 李四
+    loop 日复一日
+        z-&gt;&gt;l: 吃了吗您呐？
+        l--&gt;&gt;z: 吃了，您呢？
+        activate z
+        Note left of z: 想了一下
+        alt 还没吃
+            z-xl: 还没呢，正准备回去吃
+        else 已经吃了
+            z-xl: 我也吃过了，哈哈
+        end
+        opt 大过年的
+            l--&gt;z: 祝您新年好啊
+        end
+    end
+&lt;/div&gt;
+</code></pre>
+<script>mermaid.initialize({startOnLoad:true});</script>
+<div  align="center" class="mermaid">
+sequenceDiagram
+    participant z as 张三
+    participant l as 李四
+    loop 日复一日
+        z->>l: 吃了吗您呐？
+        l-->>z: 吃了，您呢？
+        activate z
+        Note left of z: 想了一下
+        alt 还没吃
+            z-xl: 还没呢，正准备回去吃
+        else 已经吃了
+            z-xl: 我也吃过了，哈哈
+        end
+        opt 大过年的
+            l-->z: 祝您新年好啊
+        end
+    end
+</div>
+<h1 id="insert-netease-link">Insert Netease link</h1>
+<pre><code class="language-html">&lt;p align=&quot;center&quot;&gt;&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=520 height=86 src=&quot;//music.163.com/outchain/player?type=2&amp;id=860619&amp;auto=0&amp;height=66&quot;&gt;&lt;/iframe&gt;&lt;/p&gt;
+</code></pre>
+<p align="center"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=108673&auto=0&height=66"></iframe></p>
+<h1 id="insert-bilibli-video-link">Insert Bilibli video link</h1>
+<pre><code class="language-html">&lt;p align=&quot;center&quot;&gt;&lt;iframe width=&quot;600&quot; height=&quot;450&quot; src=&quot;//player.bilibili.com/player.html?aid=327750029&amp;bvid=BV17A411b7KK&amp;cid=180056678&amp;page=1&quot; scrolling=&quot;no&quot; border=&quot;0&quot; frameborder=&quot;no&quot; framespacing=&quot;0&quot; allowfullscreen=&quot;true&quot;&gt; &lt;/iframe&gt;&lt;/p&gt;
+</code></pre>
+<p align="center"><iframe width="600" height="450" src="//player.bilibili.com/player.html?aid=327750029&bvid=BV17A411b7KK&cid=180056678&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe></p>
+<h1 id="customized-colored-notes-support">Customized colored notes support</h1>
+<pre><code class="language-html">&lt;div class=&quot;note-normal&quot;&gt;
+  &lt;p&gt; This is note&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;note-warning&quot;&gt;
+  &lt;p&gt; This is warning&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;note-important&quot;&gt;
+  &lt;p&gt; This is warning&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="note-normal">
+  <p> This is a normal note</p>
+</div>
+<div class="note-warning">
+  <p> This is a warning note</p>
+</div>
+<div class="note-important">
+<p>This is an important note</p>
+</div>
+        </div>
+
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://hxhc.xyz/post/SSPP/">
+                <h3 class="post-title">
+                  <i class="ri-arrow-left-line"></i>
+                  Step-wise sequential phase partition  algorithm based statistical modeling and online process monitoring
+                </h3>
+              </a>
+            </div>
+          
+
+          
+            <div class="next-post">
+              <a href="https://hxhc.xyz/post/how-to-setup-github-pages/">
+                <h3 class="post-title">
+                  如何搭建github pages以及提高访问速度
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.css">
+<script src="https://cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'e8a467fa1547ec3d230a',
+    clientSecret: '2a68cbc2236f231486004a9264438759e29d40f1',
+    repo: 'hxhc.github.io',
+    owner: 'hxhc',
+    admin: ['hxhc'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+      </div>
+    </div>
+
+
+    <link rel="stylesheet" href="https://hxhc-blog.oss-cn-hangzhou.aliyuncs.com/media/prism-default-2.css">
+    <script src="https://hxhc-blog.oss-cn-hangzhou.aliyuncs.com/media/prism-2.js"></script>
+
+    <script>
+
+    Prism.highlightAll()
+    let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+    // This should probably be throttled.
+    // Especially because it triggers during smooth scrolling.
+    // https://lodash.com/docs/4.17.10#throttle
+    // You could do like...
+    // window.addEventListener("scroll", () => {
+    //    _.throttle(doThatStuff, 100);
+    // });
+    // Only not doing it here to keep this Pen dependency-free.
+
+    window.addEventListener("scroll", event => {
+      let fromTop = window.scrollY;
+
+      mainNavLinks.forEach((link, index) => {
+        let section = document.getElementById(decodeURI(link.hash).substring(1));
+        let nextSection = null
+        if (mainNavLinks[index + 1]) {
+          nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+        }
+        if (section.offsetTop <= fromTop) {
+          if (nextSection) {
+            if (nextSection.offsetTop > fromTop) {
+              link.classList.add("current");
+            } else {
+              link.classList.remove("current");
+            }
+          } else {
+            link.classList.add("current");
+          }
+        } else {
+          link.classList.remove("current");
+        }
+      });
+    });
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+      var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+      if ("IntersectionObserver" in window) {
+        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              let lazyImage = entry.target
+              lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+              lazyImage.classList.remove("lazy")
+              lazyImageObserver.unobserve(lazyImage)
+            }
+          });
+        });
+
+        lazyImages.forEach(function(lazyImage) {
+          lazyImageObserver.observe(lazyImage)
+        })
+      } else {
+        // Possibly fall back to a more compatible method here
+      }
+    });
+
+    const menuContainer = document.querySelector('.menu-container')
+    const menus = document.querySelectorAll('.menu-container .menu')
+    const mask = document.querySelector('.mask')
+    const contentWrapper = document.querySelector('.content-wrapper')
+    const latestArticle = document.querySelector('.latest-article')
+    const readMore = document.querySelector('.read-more')
+    const indexPage = document.querySelector('.index-page')
+
+    const isHome = location.pathname === '/'
+    if (latestArticle) {
+      latestArticle.style.display = isHome ? 'block' : 'none'
+      readMore.style.display = isHome ? 'block' : 'none'
+      indexPage.style.display = isHome ? 'none' : 'block'
+    }
+
+    const openMenu = () => {
+      menuContainer.classList.add('open')
+      menus.forEach(menu => {
+        menu.classList.add('animated', 'fadeInLeft')
+      })
+      mask.classList.add('open')
+      contentWrapper.classList.add('is-second')
+    }
+
+    const closeMenu = () => {
+      menuContainer.classList.remove('open')
+      menus.forEach(menu => {
+        menu.classList.remove('animated', 'fadeInLeft')
+      })
+      mask.classList.remove('open')
+      contentWrapper.classList.remove('is-second')
+    }
+
+    </script>
+
+    <script src="//instant.page/5.1.1" type="module" integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+
+
+
+
+  </body>
+</html>

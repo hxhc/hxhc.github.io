@@ -1,0 +1,308 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>如何搭建github pages以及提高访问速度 | 环形缓冲</title>
+<meta name="description" content="HXHC Blog" />
+<link rel="shortcut icon" href="https://hxhc.xyz/favicon.ico?v=1715403560277">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.0/animate.min.css" integrity="sha256-HtCCUh9Hkh//8U1OwcbD8epVEUdBvuI8wj1KtqMhNkI=" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@8.11.0/dist/mermaid.min.js" integrity="sha256-sVAx+v/Q7v0Q2xm5vN7h5ccSna6gaLREhG9sF8pKT6I=" crossorigin="anonymous"></script> -->
+
+<!-- <link href="
+https://cdn.jsdelivr.net/npm/@openfonts/noto-serif-sc_chinese-simplified@1.44.2/index.min.css
+" rel="stylesheet"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/remixicon/4.2.0/remixicon.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css">
+<script src="https://cdn.bootcdn.net/ajax/libs/mermaid/9.1.1/mermaid.min.js"></script>
+
+
+<link rel="stylesheet" href="https://hxhc.xyz/styles/main.css">
+
+
+
+
+
+  </head>
+
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://hxhc.xyz">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://hxhc.xyz/images/avatar.png?v=1715403560277" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">环形缓冲</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            Table of Contents
+          </p>
+          <div class="toc-container hidden lg:block">
+            
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          Home
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          Archives
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          Tags
+        </a>
+      
+    
+      
+        <a href="https://notes.hxhc.xyz" class="menu" style="animation-delay: 0.6000000000000001s" target="_blank">
+          Notes
+        </a>
+      
+    
+      
+        <a href="https://photos.hxhc.xyz" class="menu" style="animation-delay: 0.8s" target="_blank">
+          Photo
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 1s">
+          About
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Great ideas in mind<br>
+Poor words on paper</div>
+    <a class="rss" href="https://hxhc.xyz/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()" style="backdrop-filter: blur(7px); background: hsla(0, 0%, 100%, 0.5); -webkit-backdrop-filter: blur(7px);">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">如何搭建github pages以及提高访问速度</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2021-01-26 / 3 min read
+        </div>
+        
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://hxhc-blog.oss-cn-hangzhou.aliyuncs.com/img/picgo20240304125451.png" alt="">
+        
+        <div class="post-content yue">
+          <p>这个博客已经荒废了很久。由于定位上是一个偏向技术型的博客，记录学习中遇到的一些问题，所以我一般不会把学术研究内容或浅显的问题写在博客里。此外由于不想花钱和时间搭服务器，也不想花时间学习更多的建站知识，所以选择了 github pages 这一平台。本文就如何搭建 github pages 以及提高大陆地区的访问速度做一个简单介绍。</p>
+<!-- more -->
+<p>Updated: <code>2021-01-29</code>   添加 Gridea 的教程链接.<br>
+Updated: <code>2021-07-21</code>   美化 md 文件.</p>
+<p>其实在 github pages 上建站真的太简单了，什么 hexo、hugo 和 Jekyll 等都有很多人写了很好的教程。之前我也尝试过 hexo 和 hugo，也套用了一些很好看，功能也很全面的主题，比如我最喜欢的一款 <a href="https://github.com/probberechts/hexo-theme-cactus">Cactus</a> 。</p>
+<p>说来可笑，明明定位是偏技术的博客，我却摒弃了以上的工具，选择了一个可谓纯小白的工具 <a href="https://gridea.dev/">Gridea</a> 。Gridea 集成了 markdown 编辑器、git、主题以及博客发布系统，支持 github pages、sftp 和 coding pages，可以令没有任何建站基础的小白也能很好地完成博客网站的搭建。自从用了 Gridea，我就再也没有纠结于用什么主题，怎么修改主题配置等等琐碎的操作。此外，如果对 git 或 css 等了解不深，也无需担心，因为在 Gridea 基本上不会有直接操作 git 或者 css 的时候。</p>
+<p>虽然我之前用过 hexo 和 hugo，我还是要说，Gridea 太香了。Gridea 也提供了若干精美的主题（我现在使用的就是 fly 这一主题），可以实现一定程度上的自定义功能。如果之前有用过 hexo 之类的工具，转移到 Gridea 上就是驾轻就熟，毫无操作难度。</p>
+<p>Gridea 的 <a href="https://blog.gridea.dev/github-pages-with-gridea/">用法</a> 不在此赘述，现在聊聊如何提高 github pages 的<strong>访问速度</strong>。</p>
+<ul>
+<li>
+<p>首先使用浏览器的 F12，查看拖累页面加载的元素是什么</p>
+</li>
+<li>
+<p>就我个人经验来说，访问速度慢多半是由 js 或 css 文件加载慢导致的。比如 fontawesome 下的 all.css 和 unpkg 下的 gitalk.css</p>
+</li>
+<li>
+<p>找到加载慢或者完全无法加载的元素，如果是图片，那么建议换一个图床；如果是 css 或 js，那么建议换一个 cdn(如 cdnjs)</p>
+</li>
+</ul>
+<p>此处的问题是，如果在 Gridea 生成的主页 <code>index.html</code> 文件里更改 cdn 是没有用的，因为 Gridea 会在每次更新后把主题里的模板覆盖在 <code>index.html</code> 等文件里，因此正确的做法是在主题文件夹下，找到 <code>templates/includes</code> 文件夹下的 ejs 文件，更改 ejs 里对应的 cdn 才行。在 fly 主题里，需要更改 <code>head.ejs</code> 和 <code>scripts.ejs</code> 文件里的 cdn 地址，将 fontawesome 和 unpkg 换成 cdnjs。</p>
+<p>更换 cdn 后，我的博客之前是无法加载的，现在只需 4s 即可完全加载（实际上 2s 就完成了图片和内容的加载）。</p>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://hxhc.xyz/tag/Software/">
+            <span class="flex-auto">Software</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://hxhc.xyz/post/mermaid-test/">
+                <h3 class="post-title">
+                  <i class="ri-arrow-left-line"></i>
+                  Mermaid support test
+                </h3>
+              </a>
+            </div>
+          
+
+          
+            <div class="next-post">
+              <a href="https://hxhc.xyz/post/matplotlib-style/">
+                <h3 class="post-title">
+                  Using matplotlib to create publishable graphs
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.css">
+<script src="https://cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'e8a467fa1547ec3d230a',
+    clientSecret: '2a68cbc2236f231486004a9264438759e29d40f1',
+    repo: 'hxhc.github.io',
+    owner: 'hxhc',
+    admin: ['hxhc'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+      </div>
+    </div>
+
+
+    <link rel="stylesheet" href="https://hxhc-blog.oss-cn-hangzhou.aliyuncs.com/media/prism-default-2.css">
+    <script src="https://hxhc-blog.oss-cn-hangzhou.aliyuncs.com/media/prism-2.js"></script>
+
+    <script>
+
+    Prism.highlightAll()
+    let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+    // This should probably be throttled.
+    // Especially because it triggers during smooth scrolling.
+    // https://lodash.com/docs/4.17.10#throttle
+    // You could do like...
+    // window.addEventListener("scroll", () => {
+    //    _.throttle(doThatStuff, 100);
+    // });
+    // Only not doing it here to keep this Pen dependency-free.
+
+    window.addEventListener("scroll", event => {
+      let fromTop = window.scrollY;
+
+      mainNavLinks.forEach((link, index) => {
+        let section = document.getElementById(decodeURI(link.hash).substring(1));
+        let nextSection = null
+        if (mainNavLinks[index + 1]) {
+          nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+        }
+        if (section.offsetTop <= fromTop) {
+          if (nextSection) {
+            if (nextSection.offsetTop > fromTop) {
+              link.classList.add("current");
+            } else {
+              link.classList.remove("current");
+            }
+          } else {
+            link.classList.add("current");
+          }
+        } else {
+          link.classList.remove("current");
+        }
+      });
+    });
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+      var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+      if ("IntersectionObserver" in window) {
+        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              let lazyImage = entry.target
+              lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+              lazyImage.classList.remove("lazy")
+              lazyImageObserver.unobserve(lazyImage)
+            }
+          });
+        });
+
+        lazyImages.forEach(function(lazyImage) {
+          lazyImageObserver.observe(lazyImage)
+        })
+      } else {
+        // Possibly fall back to a more compatible method here
+      }
+    });
+
+    const menuContainer = document.querySelector('.menu-container')
+    const menus = document.querySelectorAll('.menu-container .menu')
+    const mask = document.querySelector('.mask')
+    const contentWrapper = document.querySelector('.content-wrapper')
+    const latestArticle = document.querySelector('.latest-article')
+    const readMore = document.querySelector('.read-more')
+    const indexPage = document.querySelector('.index-page')
+
+    const isHome = location.pathname === '/'
+    if (latestArticle) {
+      latestArticle.style.display = isHome ? 'block' : 'none'
+      readMore.style.display = isHome ? 'block' : 'none'
+      indexPage.style.display = isHome ? 'none' : 'block'
+    }
+
+    const openMenu = () => {
+      menuContainer.classList.add('open')
+      menus.forEach(menu => {
+        menu.classList.add('animated', 'fadeInLeft')
+      })
+      mask.classList.add('open')
+      contentWrapper.classList.add('is-second')
+    }
+
+    const closeMenu = () => {
+      menuContainer.classList.remove('open')
+      menus.forEach(menu => {
+        menu.classList.remove('animated', 'fadeInLeft')
+      })
+      mask.classList.remove('open')
+      contentWrapper.classList.remove('is-second')
+    }
+
+    </script>
+
+    <script src="//instant.page/5.1.1" type="module" integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+
+
+
+
+  </body>
+</html>

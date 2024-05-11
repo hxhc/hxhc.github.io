@@ -1,0 +1,445 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Openblas vs Intel MKL for Numpy and AMD CPUs | 环形缓冲</title>
+<meta name="description" content="HXHC Blog" />
+<link rel="shortcut icon" href="https://hxhc.xyz/favicon.ico?v=1715403560277">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.0/animate.min.css" integrity="sha256-HtCCUh9Hkh//8U1OwcbD8epVEUdBvuI8wj1KtqMhNkI=" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@8.11.0/dist/mermaid.min.js" integrity="sha256-sVAx+v/Q7v0Q2xm5vN7h5ccSna6gaLREhG9sF8pKT6I=" crossorigin="anonymous"></script> -->
+
+<!-- <link href="
+https://cdn.jsdelivr.net/npm/@openfonts/noto-serif-sc_chinese-simplified@1.44.2/index.min.css
+" rel="stylesheet"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/remixicon/4.2.0/remixicon.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css">
+<script src="https://cdn.bootcdn.net/ajax/libs/mermaid/9.1.1/mermaid.min.js"></script>
+
+
+<link rel="stylesheet" href="https://hxhc.xyz/styles/main.css">
+
+
+
+
+
+  </head>
+
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://hxhc.xyz">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://hxhc.xyz/images/avatar.png?v=1715403560277" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">环形缓冲</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            Table of Contents
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#test">Test</a>
+<ul>
+<li><a href="#1-platform">1. Platform</a></li>
+<li><a href="#2-test-code">2. Test code</a></li>
+<li><a href="#3-performance-comparison">3. Performance comparison</a></li>
+</ul>
+</li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          Home
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          Archives
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          Tags
+        </a>
+      
+    
+      
+        <a href="https://notes.hxhc.xyz" class="menu" style="animation-delay: 0.6000000000000001s" target="_blank">
+          Notes
+        </a>
+      
+    
+      
+        <a href="https://photos.hxhc.xyz" class="menu" style="animation-delay: 0.8s" target="_blank">
+          Photo
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 1s">
+          About
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Great ideas in mind<br>
+Poor words on paper</div>
+    <a class="rss" href="https://hxhc.xyz/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()" style="backdrop-filter: blur(7px); background: hsla(0, 0%, 100%, 0.5); -webkit-backdrop-filter: blur(7px);">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">Openblas vs Intel MKL for Numpy and AMD CPUs</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2022-02-25 / 4 min read
+        </div>
+        
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://s2.loli.net/2024/04/08/ZDBir37bR1AVTyC.jpg" alt="">
+        
+        <div class="post-content yue">
+          <p>Choose the faster library, OpenBLAS or MKL for AMD CPUs.</p>
+<!-- more -->
+<h2 id="introduction">Introduction</h2>
+<p>When it comes to scientific computing or matrix operations,  BLAS (basic linear algebra subprograms) and LAPACK (linear algebra package) are the core libraries that provides basic algorithms.  Additionally,  there exist many alternative and more powerful libraries (<a href="https://github.com/xianyi/OpenBLAS">OpenBLAS</a> ), <a href="https://www.intel.com/content/www/us/en/develop/documentation/oneapi-programming-guide/top/api-based-programming/intel-oneapi-math-kernel-library-onemkl.html">Intel Math Kernle Library (MKL)</a> , <a href="https://developer.amd.com/amd-aocl/">AMD Optimizing CPU Libraries (AOCL)</a> , etc) that can speed the matrix operations.</p>
+<p>The MKL is one of the most famous algebra libraries, which is indeed becoming the actual standard. However, it is said that MKL is only optimized for Intel CPUs and performs poorly on AMD CPUs. OpenBLAS and AOCL are preferred for AMD CPUs. While some discussions (<a href="https://www.reddit.com/r/rstats/comments/psbzq8/mkl_vs_openblas_or_blis_on_amd/">reddit</a> , <a href="https://www.techpowerup.com/265290/amd-processors-no-longer-crippled-with-latest-matlab-mkl-update">report</a> ) also show that the newer versions of MKL perform similarly as OpenBLAS on AMD CPUs.</p>
+<p>To choose the proper library, I made a simple performance test based on Python Numpy. Remember that the test is not strict nor comprehensive at all. Those who want to choose the proper one should make a benchmark test on your own platform, especially for your specific purposes.</p>
+<h2 id="test">Test</h2>
+<h3 id="1-platform">1. Platform</h3>
+<ul>
+<li>My laptop was used for the test. It has the <mark>AMD RYZEN 5800H</mark> CPU (8 CPU cores and 16 threads, TDP 45W) and 32G memory.</li>
+<li>The OS were Window 10 and WSL1 (Ubuntu 20.04).</li>
+<li>Python and numpy version:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Environment</th>
+<th style="text-align:left">OS</th>
+<th style="text-align:left">Python version</th>
+<th style="text-align:left">Library</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><em>Env1</em></td>
+<td style="text-align:left">Win10</td>
+<td style="text-align:left">3.6</td>
+<td style="text-align:left">MKL 2020.2</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Env2</em></td>
+<td style="text-align:left">WSL1</td>
+<td style="text-align:left">3.9</td>
+<td style="text-align:left">MKL 2021.2</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Env3</em></td>
+<td style="text-align:left">WSL1</td>
+<td style="text-align:left">3.9</td>
+<td style="text-align:left">OpenBLAS</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>To install the MKL based numpy, simply run <code>conda install numpy</code></li>
+<li>To install the OpenBLAS based numpy, simply run <code>pip install numpy</code></li>
+<li>After installation, use <code>numpy.show_config()</code> to check whether the numpy library was properly configured.</li>
+</ol>
+<h3 id="2-test-code">2. Test code</h3>
+<p>I tried a very simple test code, which only covered matrix multiplication and eigenvalue decomposition.</p>
+<pre><code class="language-python">import numpy as np
+
+size = 1000  
+
+a = np.random.randn(size, size)
+b = np.random.randn(size, size)
+
+%timeit (np.dot(a,b))
+%timeit (np.linalg.eig(a))
+</code></pre>
+<ul>
+<li>The <code>size</code> parameter was set to 1000, 4000, and 10000, respectively.</li>
+<li><code>%timeit</code> is a magic function used on the Jupyter notebooks (IPython).</li>
+</ul>
+<h3 id="3-performance-comparison">3. Performance comparison</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center"><strong>size</strong></th>
+<th style="text-align:center"><strong>Matrix Multiplication</strong></th>
+<th style="text-align:center"><strong>EigValue Decomposition</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Env1</td>
+<td style="text-align:center">1000</td>
+<td style="text-align:center">17ms</td>
+<td style="text-align:center">600ms</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">4000</td>
+<td style="text-align:center">700ms</td>
+<td style="text-align:center"><em>21.5s</em></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">10000</td>
+<td style="text-align:center">10.3s</td>
+<td style="text-align:center">Too long to test</td>
+</tr>
+<tr>
+<td style="text-align:center">Env2</td>
+<td style="text-align:center">1000</td>
+<td style="text-align:center">14.2ms</td>
+<td style="text-align:center"><em>586ms</em></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">4000</td>
+<td style="text-align:center"><em>609ms</em></td>
+<td style="text-align:center">21.9s</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">10000</td>
+<td style="text-align:center">11.4s</td>
+<td style="text-align:center">Too long to test</td>
+</tr>
+<tr>
+<td style="text-align:center">Env3</td>
+<td style="text-align:center">1000</td>
+<td style="text-align:center"><em>10.1ms</em></td>
+<td style="text-align:center">738ms</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">4000</td>
+<td style="text-align:center">614ms</td>
+<td style="text-align:center">26.4s</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">10000</td>
+<td style="text-align:center"><em>8.24s</em></td>
+<td style="text-align:center">Too long to test</td>
+</tr>
+</tbody>
+</table>
+<p>From the table above, we can conclude that</p>
+<ol>
+<li>Using OpenBLAS, the matrix multiplication is faster than using MKL.</li>
+<li>Using OpenBLAS,  the eigenvalue decomposition is slower than using MKL.</li>
+<li>The performance differences are not significant and we should choose the proper library based on the specific projects (whether containing many multiplication or decomposition operations).</li>
+<li>I also tried the <a href="https://danieldk.eu/Posts/2020-08-31-MKL-Zen.html"><code>mkl_serv_intel_cpu_true</code></a> to force to use best performing routines. However, it turned out that the results before and after <code>mkl_serv_intel_cpu_true</code> are no different.</li>
+</ol>
+<p>Another point is when using OpenBLAS, the CPU usage was nearly 80%, but only around 50% when using MKL. That might be because MKL could not make full use of the AMD CPUs.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Using OpenBLAS makes matrix multiplication faster, but makes eigenvalues decomposition slower. The performance differences are not significant.</p>
+<p>In my own opinion, the newer version MKL  provides more functions, and similar performance, which makes it suitable for AMD CPUs.</p>
+<p>Next, I will try to compare more software based on MKL and OpenBLAS, such as <a href="https://notes.hxhc.xyz/2-areas/programming/cpp/eigen-tips/">Eigen</a>, <a href="https://notes.hxhc.xyz/2-areas/programming/cpp/armadillo-tips/">Armadillo</a>,  and so on.</p>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://hxhc.xyz/tag/Software/">
+            <span class="flex-auto">Software</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://hxhc.xyz/post/CUtests/">
+                <h3 class="post-title">
+                  <i class="ri-arrow-left-line"></i>
+                   Content Uniformity Tests Implementation Based on Monte-Carlo simulation in C++ and Python 
+                </h3>
+              </a>
+            </div>
+          
+
+          
+            <div class="next-post">
+              <a href="https://hxhc.xyz/post/l2-regularization-vs-weight-decay/">
+                <h3 class="post-title">
+                  L2 regularization vs Weight decay
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.css">
+<script src="https://cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'e8a467fa1547ec3d230a',
+    clientSecret: '2a68cbc2236f231486004a9264438759e29d40f1',
+    repo: 'hxhc.github.io',
+    owner: 'hxhc',
+    admin: ['hxhc'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+      </div>
+    </div>
+
+
+    <link rel="stylesheet" href="https://hxhc-blog.oss-cn-hangzhou.aliyuncs.com/media/prism-default-2.css">
+    <script src="https://hxhc-blog.oss-cn-hangzhou.aliyuncs.com/media/prism-2.js"></script>
+
+    <script>
+
+    Prism.highlightAll()
+    let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+    // This should probably be throttled.
+    // Especially because it triggers during smooth scrolling.
+    // https://lodash.com/docs/4.17.10#throttle
+    // You could do like...
+    // window.addEventListener("scroll", () => {
+    //    _.throttle(doThatStuff, 100);
+    // });
+    // Only not doing it here to keep this Pen dependency-free.
+
+    window.addEventListener("scroll", event => {
+      let fromTop = window.scrollY;
+
+      mainNavLinks.forEach((link, index) => {
+        let section = document.getElementById(decodeURI(link.hash).substring(1));
+        let nextSection = null
+        if (mainNavLinks[index + 1]) {
+          nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+        }
+        if (section.offsetTop <= fromTop) {
+          if (nextSection) {
+            if (nextSection.offsetTop > fromTop) {
+              link.classList.add("current");
+            } else {
+              link.classList.remove("current");
+            }
+          } else {
+            link.classList.add("current");
+          }
+        } else {
+          link.classList.remove("current");
+        }
+      });
+    });
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+      var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+      if ("IntersectionObserver" in window) {
+        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              let lazyImage = entry.target
+              lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+              lazyImage.classList.remove("lazy")
+              lazyImageObserver.unobserve(lazyImage)
+            }
+          });
+        });
+
+        lazyImages.forEach(function(lazyImage) {
+          lazyImageObserver.observe(lazyImage)
+        })
+      } else {
+        // Possibly fall back to a more compatible method here
+      }
+    });
+
+    const menuContainer = document.querySelector('.menu-container')
+    const menus = document.querySelectorAll('.menu-container .menu')
+    const mask = document.querySelector('.mask')
+    const contentWrapper = document.querySelector('.content-wrapper')
+    const latestArticle = document.querySelector('.latest-article')
+    const readMore = document.querySelector('.read-more')
+    const indexPage = document.querySelector('.index-page')
+
+    const isHome = location.pathname === '/'
+    if (latestArticle) {
+      latestArticle.style.display = isHome ? 'block' : 'none'
+      readMore.style.display = isHome ? 'block' : 'none'
+      indexPage.style.display = isHome ? 'none' : 'block'
+    }
+
+    const openMenu = () => {
+      menuContainer.classList.add('open')
+      menus.forEach(menu => {
+        menu.classList.add('animated', 'fadeInLeft')
+      })
+      mask.classList.add('open')
+      contentWrapper.classList.add('is-second')
+    }
+
+    const closeMenu = () => {
+      menuContainer.classList.remove('open')
+      menus.forEach(menu => {
+        menu.classList.remove('animated', 'fadeInLeft')
+      })
+      mask.classList.remove('open')
+      contentWrapper.classList.remove('is-second')
+    }
+
+    </script>
+
+    <script src="//instant.page/5.1.1" type="module" integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+
+
+
+
+  </body>
+</html>

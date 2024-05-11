@@ -1,0 +1,413 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Using matplotlib to create publishable graphs | 环形缓冲</title>
+<meta name="description" content="HXHC Blog" />
+<link rel="shortcut icon" href="https://hxhc.xyz/favicon.ico?v=1715403560277">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.0/animate.min.css" integrity="sha256-HtCCUh9Hkh//8U1OwcbD8epVEUdBvuI8wj1KtqMhNkI=" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@8.11.0/dist/mermaid.min.js" integrity="sha256-sVAx+v/Q7v0Q2xm5vN7h5ccSna6gaLREhG9sF8pKT6I=" crossorigin="anonymous"></script> -->
+
+<!-- <link href="
+https://cdn.jsdelivr.net/npm/@openfonts/noto-serif-sc_chinese-simplified@1.44.2/index.min.css
+" rel="stylesheet"> -->
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/remixicon/4.2.0/remixicon.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css">
+<script src="https://cdn.bootcdn.net/ajax/libs/mermaid/9.1.1/mermaid.min.js"></script>
+
+
+<link rel="stylesheet" href="https://hxhc.xyz/styles/main.css">
+
+
+
+
+
+  </head>
+
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://hxhc.xyz">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://hxhc.xyz/images/avatar.png?v=1715403560277" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">环形缓冲</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            Table of Contents
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#current-status">Current status</a>
+<ul>
+<li><a href="#drawbacks-of-matplotlib">drawbacks of matplotlib</a></li>
+<li><a href="#drawbacks-of-origin-lab-software">drawbacks of Origin Lab software</a></li>
+</ul>
+</li>
+<li><a href="#matplotlib-style">Matplotlib style</a>
+<ul>
+<li><a href="#style-configuration">Style configuration</a></li>
+<li><a href="#demo-graphs">demo graphs</a></li>
+</ul>
+</li>
+<li><a href="#more-pictures-and-codes-can-be-found-on-my-notes">More pictures and codes can be found on my notes</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          Home
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          Archives
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          Tags
+        </a>
+      
+    
+      
+        <a href="https://notes.hxhc.xyz" class="menu" style="animation-delay: 0.6000000000000001s" target="_blank">
+          Notes
+        </a>
+      
+    
+      
+        <a href="https://photos.hxhc.xyz" class="menu" style="animation-delay: 0.8s" target="_blank">
+          Photo
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 1s">
+          About
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Great ideas in mind<br>
+Poor words on paper</div>
+    <a class="rss" href="https://hxhc.xyz/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()" style="backdrop-filter: blur(7px); background: hsla(0, 0%, 100%, 0.5); -webkit-backdrop-filter: blur(7px);">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">Using matplotlib to create publishable graphs</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2020-07-08 / 5 min read
+        </div>
+        
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://hxhc-blog.oss-cn-hangzhou.aliyuncs.com/imgs/blog/matplotlib-demo-4.png" alt="">
+        
+        <div class="post-content yue">
+          <p>Working or sleeping, I dream of graphs - usually of rather fancy graphs on academic journals. When I think how brilliant graphs impact my feelings, I wonder about the code behind, for I am extremely tired of, and frightened by making plots by hand in <a href="https://www.originlab.com/">Origin Lab</a> or some other software.</p>
+<!-- more -->
+<p>Updated <code>2021-01-25</code>: change the color order in the mplstyle file.<br>
+Updated <code>2021-01-29</code>: add a demo graph</p>
+<h2 id="current-status">Current status</h2>
+<p>Usually my workflow of creating academic graph is:</p>
+<ol>
+<li>Doing data analysis using python or some others</li>
+<li>Exporting result data to Excel files or CSV files</li>
+<li>Copying result data into Origin Lab and making some graphs</li>
+<li>Adjusting graph details endlessly</li>
+</ol>
+<h3 id="drawbacks-of-matplotlib">drawbacks of matplotlib</h3>
+<p>Someone may ask why not use <a href="https://matplotlib.org/">matplotlib</a> to make graphs, for this would avoid using other software. Sure, it is absolutely right. And I appreciate directly using matplotlib to create graphs much. The problem is, the default style of matplotlib is far from satisfactory. Lots of details need to be changed and below is an uncompleted list:</p>
+<ul>
+<li>The default font size are too small</li>
+<li>The default linewidth is too thin</li>
+<li>The default font family is somewhat ugly (depending on the system font, indeed)</li>
+<li>......</li>
+</ul>
+<h3 id="drawbacks-of-origin-lab-software">drawbacks of Origin Lab software</h3>
+<p>I have to admit that Origin Lab is a wonderful graph software and quite easy to use for newbies and experts. It is quick to create a simple graph by clicking some buttons, and all operations can be done visually without any coding.</p>
+<p>However, when creating some complex graphs, Origin's default settings are not good enough. For example, when creating multiple subplots (the term <code>subplot</code> is consistent with matplotlib's API), I usually choose the <code>merge</code> function to gather all the subplots into one graph. But aligning all the subplots would often be a mess even if the individual plots perform perfectly. It is somewhat confusing to make all subplots' sizes perfect. Below is an example. The biggest problem is the size doesn't fit and there are many other small issue.</p>
+<p><img src="https://hxhc-blog.oss-cn-hangzhou.aliyuncs.com/imgs/blog/RADiuQKF6Nb7Icp.png" alt="before merge" loading="lazy"><br>
+<img src="https://hxhc-blog.oss-cn-hangzhou.aliyuncs.com/imgs/blog/Using%20matplotlib%20to%20create%20publishable%20pictures-1.png" alt="after merge" loading="lazy"></p>
+<h2 id="matplotlib-style">Matplotlib style</h2>
+<p>It is certain that most elements of both Origin Lab graphs and matplotlib graphs can be optimized. The problem might be that you should be very familiar with them. As far as I know, the customized format style of Origin Lab and matplotlib can be saved for further use. But it seems not easy for Origin Lab to remember the alignment settings for multiple subplots, which exhausted my patience.</p>
+<blockquote>
+<p>天下苦Origin久矣。</p>
+</blockquote>
+<p>So, when I found the project <em><a href="https://github.com/garrettj403/SciencePlots">SciencePlots</a></em>, I feel like boarding Noah's Ark. This project contains several matplotlib style files which can be simply used by <code>plt.style.use('scicence')</code>.</p>
+<p>This project opens my mind and soon I modified the style file in order to meet my requirements. The usage of the style files is like <code>ggtheme</code> in <code>ggplot2</code>, which, I accidentally met some years ago.</p>
+<h3 id="style-configuration">Style configuration</h3>
+<p>Here I simply put my configuration file for some explanation.</p>
+<pre><code class="language-yaml"># It is a modified version of garrettj403/SciencePlots/science.mplstyle
+# (https://github.com/garrettj403/SciencePlots/blob/master/styles/science.mplstyle)
+
+# Set color cycle: using vibrant palette, color-blind safe
+axes.prop_cycle : cycler('color', ['EE7733', '0077BB', '009988', 'CC3311', '33BBEE', 'EE3377', 'BBBBBB'])
+
+# Set default figure size
+figure.figsize : 8, 6
+
+# Set font size
+# Large font size helps clear vision when the graph is zoomed out
+font.size: 24
+legend.fontsize: 22
+axes.labelsize: 24
+axes.titlesize: 24
+xtick.labelsize: 24
+ytick.labelsize: 24
+axes.titlepad: 10
+
+# Set x axis
+# large ticks are also needed
+xtick.direction : in
+xtick.major.size : 6
+xtick.major.width : 1.5
+xtick.minor.size : 4
+xtick.minor.width : 1
+xtick.minor.visible : True
+xtick.top : True
+
+# Set y axis
+ytick.direction : in
+ytick.major.size : 6
+ytick.major.width : 1.5
+ytick.minor.size : 4
+ytick.minor.width : 1
+ytick.minor.visible : True
+ytick.right : True
+
+# Set line widths
+# think linewidth and big scatter points are also needed
+axes.linewidth : 2
+grid.linewidth : 1
+lines.linewidth : 3
+lines.markersize : 10
+axes.grid : False
+
+# Remove legend frame
+legend.frameon : False
+
+# Always save as 'tight'
+savefig.bbox : tight
+savefig.pad_inches : 0.05
+
+
+# Use sans-serif fonts
+# Times New Roman or Arial are for serif and sans, respectively
+# If CJK characters are necessary, change font-family to Microsoft Yahei
+font.sans-serif : Arial
+font.serif: Times New Roman
+font.family : sans-serif
+mathtext.fontset : stix
+</code></pre>
+<pre><code class="language-yaml"># for CJK
+ # please be sure that YaHei is correctly spelled instead of Yahei
+font.sans-serif : Microsoft YaHei 
+font.family: sans-serif
+mathtext.fontset : dejavuserif
+axes.unicode_minus: False
+</code></pre>
+<h3 id="demo-graphs">demo graphs</h3>
+<figure data-type="image" tabindex="1"><img src="https://hxhc-blog.oss-cn-hangzhou.aliyuncs.com/imgs/blog/Using%20matplotlib%20to%20create%20publishable%20pictures-3.png" alt="demo.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://hxhc-blog.oss-cn-hangzhou.aliyuncs.com/imgs/blog/matplotlib-demo-4.png" alt="demo3.png" loading="lazy"></figure>
+<h2 id="more-pictures-and-codes-can-be-found-on-my-notes">More pictures and codes can be found on <a href="https://notes.hxhc.xyz/areas/programming/python/matplotlib%20demos/">my notes</a></h2>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://hxhc.xyz/tag/Software/">
+            <span class="flex-auto">Software</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://hxhc.xyz/post/how-to-setup-github-pages/">
+                <h3 class="post-title">
+                  <i class="ri-arrow-left-line"></i>
+                  如何搭建github pages以及提高访问速度
+                </h3>
+              </a>
+            </div>
+          
+
+          
+            <div class="next-post">
+              <a href="https://hxhc.xyz/post/kennardstone-spxy/">
+                <h3 class="post-title">
+                  Kennard-Stone algorithm and SPXY algorithm with python implementation
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.css">
+<script src="https://cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'e8a467fa1547ec3d230a',
+    clientSecret: '2a68cbc2236f231486004a9264438759e29d40f1',
+    repo: 'hxhc.github.io',
+    owner: 'hxhc',
+    admin: ['hxhc'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+      </div>
+    </div>
+
+
+    <link rel="stylesheet" href="https://hxhc-blog.oss-cn-hangzhou.aliyuncs.com/media/prism-default-2.css">
+    <script src="https://hxhc-blog.oss-cn-hangzhou.aliyuncs.com/media/prism-2.js"></script>
+
+    <script>
+
+    Prism.highlightAll()
+    let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+    // This should probably be throttled.
+    // Especially because it triggers during smooth scrolling.
+    // https://lodash.com/docs/4.17.10#throttle
+    // You could do like...
+    // window.addEventListener("scroll", () => {
+    //    _.throttle(doThatStuff, 100);
+    // });
+    // Only not doing it here to keep this Pen dependency-free.
+
+    window.addEventListener("scroll", event => {
+      let fromTop = window.scrollY;
+
+      mainNavLinks.forEach((link, index) => {
+        let section = document.getElementById(decodeURI(link.hash).substring(1));
+        let nextSection = null
+        if (mainNavLinks[index + 1]) {
+          nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+        }
+        if (section.offsetTop <= fromTop) {
+          if (nextSection) {
+            if (nextSection.offsetTop > fromTop) {
+              link.classList.add("current");
+            } else {
+              link.classList.remove("current");
+            }
+          } else {
+            link.classList.add("current");
+          }
+        } else {
+          link.classList.remove("current");
+        }
+      });
+    });
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+      var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+      if ("IntersectionObserver" in window) {
+        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              let lazyImage = entry.target
+              lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+              lazyImage.classList.remove("lazy")
+              lazyImageObserver.unobserve(lazyImage)
+            }
+          });
+        });
+
+        lazyImages.forEach(function(lazyImage) {
+          lazyImageObserver.observe(lazyImage)
+        })
+      } else {
+        // Possibly fall back to a more compatible method here
+      }
+    });
+
+    const menuContainer = document.querySelector('.menu-container')
+    const menus = document.querySelectorAll('.menu-container .menu')
+    const mask = document.querySelector('.mask')
+    const contentWrapper = document.querySelector('.content-wrapper')
+    const latestArticle = document.querySelector('.latest-article')
+    const readMore = document.querySelector('.read-more')
+    const indexPage = document.querySelector('.index-page')
+
+    const isHome = location.pathname === '/'
+    if (latestArticle) {
+      latestArticle.style.display = isHome ? 'block' : 'none'
+      readMore.style.display = isHome ? 'block' : 'none'
+      indexPage.style.display = isHome ? 'none' : 'block'
+    }
+
+    const openMenu = () => {
+      menuContainer.classList.add('open')
+      menus.forEach(menu => {
+        menu.classList.add('animated', 'fadeInLeft')
+      })
+      mask.classList.add('open')
+      contentWrapper.classList.add('is-second')
+    }
+
+    const closeMenu = () => {
+      menuContainer.classList.remove('open')
+      menus.forEach(menu => {
+        menu.classList.remove('animated', 'fadeInLeft')
+      })
+      mask.classList.remove('open')
+      contentWrapper.classList.remove('is-second')
+    }
+
+    </script>
+
+    <script src="//instant.page/5.1.1" type="module" integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+
+
+
+
+  </body>
+</html>

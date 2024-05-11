@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://hxhc.xyz</id>
+    <title>环形缓冲</title>
+    <updated>2024-05-11T04:59:32.304Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://hxhc.xyz"/>
+    <link rel="self" href="https://hxhc.xyz/atom.xml"/>
+    <subtitle>HXHC Blog</subtitle>
+    <logo>https://hxhc.xyz/images/avatar.png</logo>
+    <icon>https://hxhc.xyz/favicon.ico</icon>
+    <rights>All rights reserved 2024, 环形缓冲</rights>
+    <entry>
+        <title type="html"><![CDATA[Solving the problem of clangd not finding system headers of MSVC]]></title>
+        <id>https://hxhc.xyz/post/solving-the-problem-of-clangd-not-finding-system-header-of-msvc/</id>
+        <link href="https://hxhc.xyz/post/solving-the-problem-of-clangd-not-finding-system-header-of-msvc/">
+        </link>
+        <updated>2024-04-24T06:46:58.000Z</updated>
+        <summary type="html"><![CDATA[<p><a href="https://clangd.llvm.org/"><code>Clangd</code></a> is a language server that can work with many editors via a plugin, such as the <a href="https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd"><code>clangd</code> plugin</a> in VSCode. Generally, the plugin is used in couple with <code>cmake</code> or other tools which can generate a <code>compile-commands.json</code> file. It is a very good plugin, maybe better than the Microsoft's <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools"><code>C/C++</code> plugin</a>. However, there are still some annoying issues, especially on Windows. One of them is that clangd can't find the system headers, such as <code>iostream</code>, <code>fstream</code>. To solve this, one way is to manually specify the include directories of system headers in the <a href="https://clangd.llvm.org/config#files">clangd configure file</a>.</p>
+]]></summary>
+        <content type="html"><![CDATA[<p><a href="https://clangd.llvm.org/"><code>Clangd</code></a> is a language server that can work with many editors via a plugin, such as the <a href="https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd"><code>clangd</code> plugin</a> in VSCode. Generally, the plugin is used in couple with <code>cmake</code> or other tools which can generate a <code>compile-commands.json</code> file. It is a very good plugin, maybe better than the Microsoft's <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools"><code>C/C++</code> plugin</a>. However, there are still some annoying issues, especially on Windows. One of them is that clangd can't find the system headers, such as <code>iostream</code>, <code>fstream</code>. To solve this, one way is to manually specify the include directories of system headers in the <a href="https://clangd.llvm.org/config#files">clangd configure file</a>.</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ Content Uniformity Tests Implementation Based on Monte-Carlo simulation in C++ and Python ]]></title>
+        <id>https://hxhc.xyz/post/CUtests/</id>
+        <link href="https://hxhc.xyz/post/CUtests/">
+        </link>
+        <updated>2022-05-16T13:37:22.000Z</updated>
+        <summary type="html"><![CDATA[<p>Content uniformity tests process Implemention in C++ and Python codes. Using C++ to speed codes for 100 times.</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Content uniformity tests process Implemention in C++ and Python codes. Using C++ to speed codes for 100 times.</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Openblas vs Intel MKL for Numpy and AMD CPUs]]></title>
+        <id>https://hxhc.xyz/post/openblas-vs-intel-mkl-for-numpy/</id>
+        <link href="https://hxhc.xyz/post/openblas-vs-intel-mkl-for-numpy/">
+        </link>
+        <updated>2022-02-25T06:55:03.000Z</updated>
+        <summary type="html"><![CDATA[<p>Choose the faster library, OpenBLAS or MKL for AMD CPUs.</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Choose the faster library, OpenBLAS or MKL for AMD CPUs.</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[L2 regularization vs Weight decay]]></title>
+        <id>https://hxhc.xyz/post/l2-regularization-vs-weight-decay/</id>
+        <link href="https://hxhc.xyz/post/l2-regularization-vs-weight-decay/">
+        </link>
+        <updated>2021-09-14T01:49:29.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[From Keras to PyTorch]]></title>
+        <id>https://hxhc.xyz/post/from-keras-to-pytorch/</id>
+        <link href="https://hxhc.xyz/post/from-keras-to-pytorch/">
+        </link>
+        <updated>2021-08-22T09:22:47.000Z</updated>
+        <summary type="html"><![CDATA[<p>This post is to record the issues I encounted during the implementation from Keras to PyTorch. At first the structure of the CNN modes is introduced. Then,  the codes in Keras are shown. Next, The partial implementation in pure Pytorch is given and at last, the implementation in Pytorch Lightning is also presented.</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>This post is to record the issues I encounted during the implementation from Keras to PyTorch. At first the structure of the CNN modes is introduced. Then,  the codes in Keras are shown. Next, The partial implementation in pure Pytorch is given and at last, the implementation in Pytorch Lightning is also presented.</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Savitzky–Golay filter python implementation]]></title>
+        <id>https://hxhc.xyz/post/SG_filter/</id>
+        <link href="https://hxhc.xyz/post/SG_filter/">
+        </link>
+        <updated>2021-07-19T13:10:20.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Step-wise sequential phase partition  algorithm based statistical modeling and online process monitoring]]></title>
+        <id>https://hxhc.xyz/post/SSPP/</id>
+        <link href="https://hxhc.xyz/post/SSPP/">
+        </link>
+        <updated>2021-07-19T13:00:42.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Mermaid support test]]></title>
+        <id>https://hxhc.xyz/post/mermaid-test/</id>
+        <link href="https://hxhc.xyz/post/mermaid-test/">
+        </link>
+        <updated>2021-07-14T08:17:55.000Z</updated>
+        <summary type="html"><![CDATA[<p>Test for mermaid and iframe</p>
+<p><code>2022-5-26</code> updated: Mermaid support has be removed because loading mermaid.min.js costs too much time. It will be re-eabled once needed.</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Test for mermaid and iframe</p>
+<p><code>2022-5-26</code> updated: Mermaid support has be removed because loading mermaid.min.js costs too much time. It will be re-eabled once needed.</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[如何搭建github pages以及提高访问速度]]></title>
+        <id>https://hxhc.xyz/post/how-to-setup-github-pages/</id>
+        <link href="https://hxhc.xyz/post/how-to-setup-github-pages/">
+        </link>
+        <updated>2021-01-26T04:10:59.000Z</updated>
+        <summary type="html"><![CDATA[<p>这个博客已经荒废了很久。由于定位上是一个偏向技术型的博客，记录学习中遇到的一些问题，所以我一般不会把学术研究内容或浅显的问题写在博客里。此外由于不想花钱和时间搭服务器，也不想花时间学习更多的建站知识，所以选择了 github pages 这一平台。本文就如何搭建 github pages 以及提高大陆地区的访问速度做一个简单介绍。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>这个博客已经荒废了很久。由于定位上是一个偏向技术型的博客，记录学习中遇到的一些问题，所以我一般不会把学术研究内容或浅显的问题写在博客里。此外由于不想花钱和时间搭服务器，也不想花时间学习更多的建站知识，所以选择了 github pages 这一平台。本文就如何搭建 github pages 以及提高大陆地区的访问速度做一个简单介绍。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Using matplotlib to create publishable graphs]]></title>
+        <id>https://hxhc.xyz/post/matplotlib-style/</id>
+        <link href="https://hxhc.xyz/post/matplotlib-style/">
+        </link>
+        <updated>2020-07-08T12:40:34.000Z</updated>
+        <summary type="html"><![CDATA[<p>Working or sleeping, I dream of graphs - usually of rather fancy graphs on academic journals. When I think how brilliant graphs impact my feelings, I wonder about the code behind, for I am extremely tired of, and frightened by making plots by hand in <a href="https://www.originlab.com/">Origin Lab</a> or some other software.</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Working or sleeping, I dream of graphs - usually of rather fancy graphs on academic journals. When I think how brilliant graphs impact my feelings, I wonder about the code behind, for I am extremely tired of, and frightened by making plots by hand in <a href="https://www.originlab.com/">Origin Lab</a> or some other software.</p>
+]]></content>
+    </entry>
+</feed>
